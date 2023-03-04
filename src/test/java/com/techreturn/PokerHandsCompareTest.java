@@ -11,7 +11,11 @@ public class PokerHandsCompareTest {
     //@Test
     @ParameterizedTest
     @CsvSource({"'white','Black: 2H 3D 5S 9C KD','White: 2C 3H 4S 8C AH'",
-                "'black','Black: 2H AD 5S 9C KD','White: 2C 3H KS 8C QH'"})
+                "'black','Black: 2H AD 5S 9C KD','White: 2C 3H KS 8C QH'",
+                "'Tie','Black: 2H AD 5S 9C KD','White: 2C AH 9S 5C KH'",
+                "'black','Black: 2H QD 5S 9C KD','White: 2C 3H KS 8C JH'",
+                        "'white','Black: 9C 3D 5S 2H KD','White: 2C 4H 5S 9C KH'"
+    })
     public void compareSimpleTest(String expected, String black, String white) {
         PokerHands pokerhands = new PokerHands();
         //string expected = null;

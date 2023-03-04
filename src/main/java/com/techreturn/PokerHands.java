@@ -1,5 +1,6 @@
 package com.techreturn;
 
+
 public class PokerHands {
 
     public final int NumOfPersons = 2;
@@ -13,38 +14,48 @@ public class PokerHands {
         }
         return j;
     }
-    private String getHighestValue(String[] value){
-        // compare each char and set the higher value
-        //String highest = value[0];
-        String[] sList = new String[value.length];
-        for (int j=0; j< value.length;j++ ){
-            sList[j] = value[j];
-        }
+
+    private void orderValue(String[] cList) {
         String temp = "";
-        for (int i= 0; i< (sList.length-1);i++) {
-            // compare i & i+1,
-            //if i is a
-            if (lookupOrder(sList[i]) > lookupOrder(sList[i+1]) ){
-                temp = sList[i];
-                sList[i] = sList[i+1];
-                sList[i+1] = temp;
-          //      highest = value[i + 1];
+        int count = cList.length;
+        // bubble sort - start from 1st one, move highest one to the end
+        for (int i= 0; i< count;i++) {
+            for(int j=0; j < count -i-1; j++ ){
+                if (lookupOrder(cList[j]) > lookupOrder(cList[j+1]) ){
+                    temp = cList[j];
+                    cList[j] = cList[j+1];
+                    cList[j+1] = temp;
+                }
             }
         }
-        return sList[sList.length-1];
     }
 
-    private int findHigher(String first, String second){
-        System.out.println(first +" "+second);
-        if (first.equals(second)){
-            return 0;
+
+    private int compareValueList(String[] valueList1, String[] valueList2) {
+
+        String[] cList1 = new String[valueList1.length];
+        for (int i=0; i< valueList1.length; i++){ cList1[i]= valueList1[i];}
+
+        String[] cList2 = new String[valueList2.length];
+        for (int i=0; i< valueList2.length; i++){ cList2[i]= valueList2[i];}
+        //reorder the two list for identifying the higher one
+        orderValue(cList1);
+        orderValue(cList2);
+        //compare the 1st highest, 2nd highest, etc. of each list
+        int k =0;
+        int len = cList1.length;
+        int r = 0;
+        while (k< len) {
+            r = lookupOrder(cList1[len - k-1]) - lookupOrder(cList2[len - k-1]);
+            if (r > 0){return 1;}
+            else
+            if (r <0) {return 2;}
+            else k++;   //continue if same
         }
-        String[] strArray = {first, second};
-        if (getHighestValue(strArray).equals(first)){
-            return 1;
-        } else return 2;
-
+        return 0;
     }
+
+
     public String compare(String first, String second){
 
         String cardsInput[] = {first, second};    //keep each player's input cards
@@ -76,10 +87,12 @@ public class PokerHands {
                 // if (i less than i=1 is false; return i-1
                 // if they are same,return none
                 // compareResult (1st, 2nd) return 1for 1st higher, 2 for 2nd higher, 0 for same
-                 int compareResult = findHigher(getHighestValue(players[i].getValueList()), getHighestValue(players[i-1].getValueList()));
-                 switch (compareResult) {
+                //compare 1st and 2nd,by order of each highest,2nd highest, etc until a higher between two is identified
+
+                int compareResult = compareValueList (players[i].getValueList(), players[i-1].getValueList());
+                switch (compareResult) {
                     case 0:
-                        return "";// indicate none is higher
+                        return "Tie";// indicate none is higher
                     case 1:
                         return players[i].getName().toLowerCase();
                     case 2:
@@ -89,4 +102,8 @@ public class PokerHands {
         }
         return "";
     }
+
+
+
+
 }

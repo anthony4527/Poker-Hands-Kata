@@ -15,15 +15,23 @@ public class PokerHands {
     }
     private String getHighestValue(String[] value){
         // compare each char and set the higher value
-        String highest = value[0];
-        for (int i= 0; i< (value.length-1);i++) {
+        //String highest = value[0];
+        String[] sList = new String[value.length];
+        for (int j=0; j< value.length;j++ ){
+            sList[j] = value[j];
+        }
+        String temp = "";
+        for (int i= 0; i< (sList.length-1);i++) {
             // compare i & i+1,
             //if i is a
-            if (lookupOrder(value[i]) < lookupOrder(value[i+1]) ){
-                highest = value[i + 1];
+            if (lookupOrder(sList[i]) > lookupOrder(sList[i+1]) ){
+                temp = sList[i];
+                sList[i] = sList[i+1];
+                sList[i+1] = temp;
+          //      highest = value[i + 1];
             }
         }
-        return highest;
+        return value[value.length-1];
     }
 
     private int findHigher(String first, String second){
@@ -73,7 +81,7 @@ public class PokerHands {
                     case 0:
                         return "";// indicate none is higher
                     case 1:
-                        return (players[i].getName().toLowerCase());
+                        return players[i].getName().toLowerCase();
                     case 2:
                         return players[i-1].getName().toLowerCase();
                 }

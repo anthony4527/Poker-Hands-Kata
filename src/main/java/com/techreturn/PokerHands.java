@@ -31,7 +31,7 @@ public class PokerHands {
           //      highest = value[i + 1];
             }
         }
-        return value[value.length-1];
+        return sList[sList.length-1];
     }
 
     private int findHigher(String first, String second){

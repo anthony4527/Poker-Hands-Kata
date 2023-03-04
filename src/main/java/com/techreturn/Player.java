@@ -7,8 +7,22 @@ public class Player {
 
     public String getName(){ return this.name;}
 
-    public char[] getSuitList(){ return this.suitList;}
-    public String[] getValueList(){ return this.valueList;}
+    public char[] getSuitList(){
+        int len = this.suitList.length;
+        char[] suit = new char[len];
+        for (int i=0; i < len; i++ ){
+            suit[i] = this.suitList[i];
+        }
+        return suit;
+    }
+    public String[] getValueList(){
+        int len = this.valueList.length;
+        String[] vStr = new String[len];
+        for (int i=0; i < len; i++ ){
+           vStr[i] = this.valueList[i];
+        }
+        return vStr;
+    }
 
 
     public Player(String name, char[] suitList, String[] valueList){

@@ -1,5 +1,11 @@
 package com.techreturn;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 
 public class PokerHands {
 
@@ -55,6 +61,19 @@ public class PokerHands {
         return 0;
     }
 
+    private String compareHighCards(Player p1, Player p2){
+        int compareResult = compareValueList (p1.getValueList(), p2.getValueList());
+
+        switch (compareResult) {
+            case 0:
+                return "Tie";// indicate none is higher
+            case 1:
+                return p1.getName().toLowerCase();
+            case 2:
+                return p2.getName().toLowerCase();
+        }
+        return "";
+    }
 
     public String compare(String first, String second){
 
@@ -82,14 +101,16 @@ public class PokerHands {
             players[i] = new Player(tempInfo[0], suitList, valueList);
 
             //compare this player with previous player based on card value
-            if (i==1){
+/*            if (i==1){
                 // if (i higher than(i-1))is true;return i,
                 // if (i less than i=1 is false; return i-1
                 // if they are same,return none
-                // compareResult (1st, 2nd) return 1for 1st higher, 2 for 2nd higher, 0 for same
+                // compareResult (1st, 2nd) return for 1st higher, 2 for 2nd higher, 0 for same
                 //compare 1st and 2nd,by order of each highest,2nd highest, etc until a higher between two is identified
 
+
                 int compareResult = compareValueList (players[i].getValueList(), players[i-1].getValueList());
+
                 switch (compareResult) {
                     case 0:
                         return "Tie";// indicate none is higher
@@ -98,12 +119,74 @@ public class PokerHands {
                     case 2:
                         return players[i-1].getName().toLowerCase();
                 }
+            }*/
+        }
+        //add pattern check first  i.e. two in a pair; straight; full house; three in a pair; flush
+        for (int j=0; j < NumOfPersons -1 ; j++){
+            //identify each hand category
+            //return the player which higher category
+            //if same category, compare by High Card rule
+            //boolean b1 =isPair(players[j]);
+            //boolean b2 =isPair(players[j+1]);
+            if ((isPair(players[j])) && (!isPair(players[j+1]) )){
+                return players[j].getName().toLowerCase();
+            }else {
+                if ((!isPair(players[j])) && (isPair(players[j+1])) ){
+                    return players[j+1].getName().toLowerCase();
+                } else {
+                    if ((isPair(players[j])) && (isPair(players[j+1]) )){
+                        return comparePairs(players[j],players[j+1]); //return name of the player with higher score
+                    } else return compareHighCards (players[j],players[j+1]);
+                }
             }
+
         }
         return "";
     }
 
+    private boolean isPair(Player p){
+        String[] strList = p.getValueList();
+         Map<String, Long> group = Arrays.stream(strList).collect(Collectors.groupingBy(
+                 Function.identity(), Collectors.counting()));
+         return group.containsValue(2L); //if count =2, return true for a pair
+    }
 
+    private String comparePairs(Player p1, Player p2){
+        String value1 ="";
+        String value2 = "";
+        Map<String, Long> group1 = Arrays.stream(p1.getValueList()).collect(Collectors.groupingBy(
+                Function.identity(), Collectors.counting()));
+        Map<String, Long> group2 = Arrays.stream(p2.getValueList()).collect(Collectors.groupingBy(
+                Function.identity(), Collectors.counting()));
+
+        for(Entry<String, Long> entry1: group1.entrySet()) {
+            // if give value is equal to value from entry
+            // print the corresponding key
+            if (entry1.getValue() == 2) {
+                value1 = entry1.getKey();
+            }
+        }
+
+        for(Entry<String, Long> entry2: group2.entrySet()) {
+            // if give value is equal to value from entry
+            // print the corresponding key
+            if (entry2.getValue() == 2) {
+                value2 = entry2.getKey();
+            }
+        }
+        String[] s1 = {value1};
+        String[] s2 = {value2};
+        int cp = compareValueList (s1, s2);
+        switch (cp) {
+            case 0:
+                return "Tie";// indicate none is higher
+            case 1:
+                return p1.getName().toLowerCase();
+            case 2:
+                return p2.getName().toLowerCase();
+        }
+        return "";
+    }
 
 
 }

@@ -22,4 +22,15 @@ public class PokerHandsCompareTest {
         // compare method return the person name in lowercase with higher rank, or null if they are same
         assertEquals( expected, pokerhands.compare(black, white ));
     }
+
+    //@Test
+    @ParameterizedTest
+    @CsvSource({"'black','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S 8C AH'",
+            "'white','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S AC AH'"
+        })
+    public void compareDifferentRanks(String expected, String black, String white) {
+        PokerHands pokerhands = new PokerHands();
+
+        assertEquals( expected, pokerhands.compare(black, white ));
+    }
 }

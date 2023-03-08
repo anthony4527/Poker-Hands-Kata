@@ -100,26 +100,6 @@ public class PokerHands {
 
             players[i] = new Player(tempInfo[0], suitList, valueList);
 
-            //compare this player with previous player based on card value
-/*            if (i==1){
-                // if (i higher than(i-1))is true;return i,
-                // if (i less than i=1 is false; return i-1
-                // if they are same,return none
-                // compareResult (1st, 2nd) return for 1st higher, 2 for 2nd higher, 0 for same
-                //compare 1st and 2nd,by order of each highest,2nd highest, etc until a higher between two is identified
-
-
-                int compareResult = compareValueList (players[i].getValueList(), players[i-1].getValueList());
-
-                switch (compareResult) {
-                    case 0:
-                        return "Tie";// indicate none is higher
-                    case 1:
-                        return players[i].getName().toLowerCase();
-                    case 2:
-                        return players[i-1].getName().toLowerCase();
-                }
-            }*/
         }
         //add pattern check first  i.e. two in a pair; straight; full house; three in a pair; flush
         for (int j=0; j < NumOfPersons -1 ; j++){
@@ -187,6 +167,4 @@ public class PokerHands {
         }
         return "";
     }
-
-
 }

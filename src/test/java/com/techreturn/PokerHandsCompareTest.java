@@ -26,7 +26,8 @@ public class PokerHandsCompareTest {
     //@Test
     @ParameterizedTest
     @CsvSource({"'black','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S 8C AH'",
-            "'white','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S AC AH'"
+            "'white','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S AC AH'",
+            "'white','Black: 2H 3D 5S 9C 8D','White: 2C 4H 3S 4C AH'"
         })
     public void compareDifferentRanks(String expected, String black, String white) {
         PokerHands pokerhands = new PokerHands();

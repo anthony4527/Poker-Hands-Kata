@@ -41,11 +41,8 @@ public class PokerHands {
 
     private int compareValueList(List<String> valueList1, List<String> valueList2) {
 
-        String[] cList1 = new String[valueList1.size()];
-        for (int i=0; i< valueList1.size(); i++){ cList1[i]= valueList1.get(i);}
-
-        String[] cList2 = new String[valueList2.size()];
-        for (int i=0; i< valueList2.size(); i++){ cList2[i]= valueList2.get(i);}
+        String[] cList1 = valueList1.toArray(new String[valueList1.size()]);
+        String[] cList2 = valueList2.toArray(new String[valueList2.size()]);
         //reorder the two list for identifying the higher one
         orderValue(cList1);
         orderValue(cList2);
@@ -109,10 +106,10 @@ public class PokerHands {
             //identify each hand category
             //return the player which higher category
             //if same category, compare by High Card rule
-            //boolean b1 =isPair(players[j]);
-            //boolean b2 =isPair(players[j+1]);
             if ((isPair(players[j])) && (!isPair(players[j+1]) )){
-                return players[j].getName().toLowerCase();
+                MessageDisplay msgDisplay = new MessageDisplay(players[j].getName(), String value);
+                return msgDisplay.print();
+                //return players[j].getName().toLowerCase();
             }else {
                 if ((!isPair(players[j])) && (isPair(players[j+1])) ){
                     return players[j+1].getName().toLowerCase();
@@ -178,9 +175,7 @@ public class PokerHands {
                     case 2:
                         return p2.getName().toLowerCase();
                 }
-
             }
-
 
         return "";
     }

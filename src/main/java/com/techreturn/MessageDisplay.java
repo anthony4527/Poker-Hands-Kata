@@ -4,16 +4,19 @@ import java.util.Map;
 
 public class MessageDisplay {
 
+    final String[] phrase = {
+            "high card: ",
+            "one pair: "};
     private String name;
     private String cardValue;
-    public MessageDisplay (Map<String, String> winner){
+
+    private int category;
+    public MessageDisplay (Map<String, String> winner, int category){
         for (String name:winner.keySet()){
             this.name = name;
             this.cardValue = winner.get(name);
         }
-        //        Map.Entry<String, String> entry = winner.entrySet();
-        /*this.name = entry.getKey();
-        this.cardValue = entry.getValue();*/
+        this.category= category;
     }
 
     public String print(){
@@ -21,7 +24,7 @@ public class MessageDisplay {
         String msg = "";
         if (this.cardValue == "") {msg ="Tie";}
         else {
-            msg = this.name + " wins - with high card: "+ VALUE.getValue(this.cardValue).text;
+            msg = this.name + " wins - with "+ phrase[category] + VALUE.getValue(this.cardValue).text;
         }
         return msg;
     }

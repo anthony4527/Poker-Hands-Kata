@@ -10,21 +10,8 @@ import java.util.stream.Collectors;
 
 
 public class PokerHands {
-
     public final int NumOfPersons = 2;
-    public final String[] valueOrder = {"1","2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-    /*
-    public int getValueScore(String value){
-        // use stream
-        int j =0;
-        while (j < valueOrder.length) {
-            if (value.equals(valueOrder[j])) {
-                break;
-            } else j++;
-        }
-        return j;
-    }
-*/
+
     private void orderValue(String[] cList) {
         String temp = "";
         int count = cList.length;
@@ -74,16 +61,6 @@ public class PokerHands {
     private Map<String, String> compareHighCards(Player p1, Player p2){
         return compareValueList (p1.getName(), Arrays.asList(p1.getValueList()), p2.getName(),
                                                 Arrays.asList(p2.getValueList()));
-
-        /*switch (compareResult) {
-            case 0:
-                return "Tie";// indicate none is higher
-            case 1:
-                return p1.getName();
-            case 2:
-                return p2.getName();
-        }
-        return "";*/
     }
 
     public String compare(String first, String second){
@@ -93,16 +70,16 @@ public class PokerHands {
         char[] suitList = new char[5];
         String[] valueList = new String[5];
         int strLen=0;
+        int category[] = {0,1};
 
         String tempInfo[]= new String[6]; //store name and 5 pokers on hand
         //convert each input string to name and the suit and the number
-        //create two arrays - one for suit and one for values
         for (int i = 0; i < NumOfPersons; i++){
             tempInfo = cardsInput[i].split(" ");
             //extract all suits into suitList
             //extract all values into valueList
             for (int j=0; j < 5; j++ ) {
-                //
+
                 strLen = tempInfo[j + 1].length();
                 suitList[j] = tempInfo[j + 1].charAt(strLen - 1);
                 valueList[j] = tempInfo[j + 1].substring(0, strLen - 1);
@@ -110,28 +87,34 @@ public class PokerHands {
             tempInfo[0] = tempInfo[0].substring(0, tempInfo[0].length() - 1);
 
             players[i] = new Player(tempInfo[0], suitList, valueList);
-
         }
         //add pattern check first  i.e. two in a pair; straight; full house; three in a pair; flush
         for (int j=0; j < NumOfPersons -1 ; j++){
             //identify each hand category
             //return the player which higher category
             //if same category, compare by High Card rule
-            if ((isPair(players[j])) && (!isPair(players[j+1]) )){
+            Map<String,String> pair1 = findPair(players[j]);
+            Map<String,String> pair2 = findPair(players[j+1]);
 
+            if ((pair1.size()!=0) && (pair2.size()==0)){
+                MessageDisplay msgDisplay = new MessageDisplay(pair1, category[1]);
+                return msgDisplay.print();
                 //return players[j].getName().toLowerCase();
             }else {
-                if ((!isPair(players[j])) && (isPair(players[j+1])) ){
-                    return players[j+1].getName().toLowerCase();
+                if ((pair1.size()==0) && (pair2.size()!=0) ){
+//                    return players[j+1].getName().toLowerCase();
+                    MessageDisplay msgDisplay = new MessageDisplay(pair1,category[1]);
+                    return msgDisplay.print();
                 } else {
-                    if ((isPair(players[j])) && (isPair(players[j+1]) )){
-                        return comparePairs(players[j],players[j+1]); //return name of the player with higher score
+                    if ((pair1.size()!=0) && (pair2.size()!=0)){
+                        Map<String, String> winner =comparePairs(players[j],players[j+1]);
+                        MessageDisplay msgDisplay = new MessageDisplay(winner,category[1]);
+                        return msgDisplay.print();
+                        //return comparePairs(players[j],players[j+1]); //return name of the player with higher score
                     } else {
                         Map<String,String> winner = compareHighCards(players[j],players[j+1]);
-                        //String winCard = "A";
-                        MessageDisplay msgDisplay = new MessageDisplay(winner);
+                        MessageDisplay msgDisplay = new MessageDisplay(winner,category[0]);
                         return msgDisplay.print();
-
                     }
                 }
             }
@@ -140,18 +123,58 @@ public class PokerHands {
         return "";
     }
 
-    private boolean isPair(Player p){
+    private Map<String, String> findPair(Player p){
+        String cardValue="";
         String[] strList = p.getValueList();
          Map<String, Long> group = Arrays.stream(strList).collect(Collectors.groupingBy(
                  Function.identity(), Collectors.counting()));
-         return group.containsValue(2L); //if count =2, return true for a pair
+        //if count =2, return entry for player name and card in pair
+        for(Entry<String, Long> entry: group.entrySet()) {
+            // if give value is equal to value from entry
+            // print the corresponding key
+            if (entry.getValue() == 2L) {
+                cardValue = entry.getKey();
+                break;
+            }
+        }
+        Map<String, String> pair = new HashMap<>();
+        if (!cardValue.equals("")){ //insert card in pair to map entry and return
+            pair.put(p.getName(),cardValue);
+        }
+        // if pair not found, return null
+        return pair;
     }
 
-    private String comparePairs(Player p1, Player p2){
-        String value1 = "";
-        String value2 = "";
+    private Map<String, String> comparePairs(Player p1, Player p2) {
+        //String value1 = "";
+        //String value2 = "";
         final String v1;
         final String v2;
+        //Map<String,String> winner = new HashMap<>();
+
+        Map<String, String> pair1 = findPair(p1);
+        Map<String, String> pair2 = findPair(p2);
+        // value1 = VALUE.getValue();
+
+        v1 = pair1.get(p1.getName());
+        v2 = pair2.get(p1.getName());
+
+        int score1 = VALUE.getValue(v1).score;
+        int score2 = VALUE.getValue(v2).score;
+
+        if (score1 > score2) {
+            return pair1;
+        } else if (score1 < score2) {
+            return pair2;
+        }
+        // compare high card if players have same pairs
+        List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList());
+        List<String> s2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2)).collect(Collectors.toList());
+        Map<String, String> winner = compareValueList(p1.getName(), s1, p2.getName(), s2);
+
+        return winner;
+    }
+/*
         Map<String, Long> group1 = Arrays.stream(p1.getValueList()).collect(Collectors.groupingBy(
                 Function.identity(), Collectors.counting()));
         Map<String, Long> group2 = Arrays.stream(p2.getValueList()).collect(Collectors.groupingBy(
@@ -183,7 +206,8 @@ public class PokerHands {
                 List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList() );
                 List<String> s2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2)).collect(Collectors.toList() );
                 Map<String, String> winner = compareValueList (p1.getName(), s1, p2.getName(), s2);
-                return "Tie";
+                return "Tie";*/
+
                 /*
                 switch (cp) {
                     case 0:
@@ -192,9 +216,9 @@ public class PokerHands {
                         return p1.getName().toLowerCase();
                     case 2:
                         return p2.getName().toLowerCase();
-                }*/
-            }
+                }
+            }*/
 
         //return "";
-    }
+
 }

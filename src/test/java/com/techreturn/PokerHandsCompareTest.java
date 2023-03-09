@@ -34,12 +34,12 @@ public class PokerHandsCompareTest {
 
     //@Test
     @ParameterizedTest
-    @CsvSource({"'black','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S 8C AH'",
-            "'white','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S AC AH'",
-            "'white','Black: 2H 3D 5S 9C 8D','White: 2C 4H 3S 4C AH'",
-                    "'black','Black: 2H 4D 4S 9C AD','White: 2C 4H 3S 4C KH'",
-            "'tie','Black: 2H 4D 4S 9C AD','White: 2C 4H 9S 4C AH'",
-            "'white','Black: QH 3D QS AC 8D','White: KC 7H 3S 4C KH'"
+    @CsvSource({"'Black wins - with one pair: 9','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S 8C AH'",
+            "'White wins - with one pair: Ace','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S AC AH'",
+            "'White wins - with one pair: 4','Black: 2H 3D 5S 9C 8D','White: 2C 4H 3S 4C AH'",
+                    "'Black wins - with high card: Ace','Black: 2H 4D 4S 9C AD','White: 2C 4H 3S 4C KH'",
+            "'Tie','Black: 2H 4D 4S 9C AD','White: 2C 4H 9S 4C AH'",
+            "'White wins - with one pair: King','Black: QH 3D QS AC 8D','White: KC 7H 3S 4C KH'"
         })
     public void compareDifferentRanks(String expected, String black, String white) {
         PokerHands pokerhands = new PokerHands();

@@ -1,6 +1,7 @@
-package com.techreturn;
+package com.techreturn.View;
 
-import java.util.Map;
+import com.techreturn.Enum.VALUE;
+import com.techreturn.Winner;
 
 public class MessageDisplay {
 
@@ -12,18 +13,11 @@ public class MessageDisplay {
 
     private int category;
     public MessageDisplay (Winner winner){
-        /*
-        for (String name:winner.keySet()){
-            this.name = name;
-            this.cardValue = winner.get(name);
-        }
-        this.category= category;*/
         this.name = winner.getName();
         this.category = winner.getCategory();
         for (int i =0; i < cardValue.length ; i++){
          cardValue[i] = winner.getWinCard(i);
         }
-
     }
 
     public String print(){

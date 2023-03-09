@@ -1,4 +1,4 @@
-package com.techreturn;
+package com.techreturn.Enum;
 
 public enum VALUE {
         ONE("2",1,"2"),TWO("3",2,"3"), FOUR("4",3,"4"),
@@ -7,9 +7,9 @@ public enum VALUE {
         JACK("J",10,"Jack"),QUEEN("Q",11,"Queen"),KING("K",12,"King"),
         ACE("A",13,"Ace");
 
-        String value;
-        int score;
-        String text;
+        public final String value;
+    public final int score;
+    public final String text;
         private VALUE(String value, int score, String text){
             this.value = value;
             this.score = score;
@@ -24,4 +24,6 @@ public enum VALUE {
             }
             return null;
         }
+
+
 }

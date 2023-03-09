@@ -1,5 +1,8 @@
 package com.techreturn;
 
+import com.techreturn.Enum.VALUE;
+import com.techreturn.View.MessageDisplay;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -98,7 +101,6 @@ public class PokerHands {
             //extract all suits into suitList
             //extract all values into valueList
             for (int j=0; j < 5; j++ ) {
-
                 strLen = tempInfo[j + 1].length();
                 suitList[j] = tempInfo[j + 1].charAt(strLen - 1);
                 valueList[j] = tempInfo[j + 1].substring(0, strLen - 1);
@@ -172,11 +174,8 @@ public class PokerHands {
     }
 
     private Winner comparePairs(Player p1, Player p2) {
-        //String value1 = "";
-        //String value2 = "";
         final String v1;
         final String v2;
-        //Map<String,String> winner = new HashMap<>();
 
         Map<String, String> pair1 = findPair(p1);
         Map<String, String> pair2 = findPair(p2);
@@ -223,51 +222,6 @@ public class PokerHands {
         }
 
     }
-/*
-        Map<String, Long> group1 = Arrays.stream(p1.getValueList()).collect(Collectors.groupingBy(
-                Function.identity(), Collectors.counting()));
-        Map<String, Long> group2 = Arrays.stream(p2.getValueList()).collect(Collectors.groupingBy(
-                Function.identity(), Collectors.counting()));
 
-        for(Entry<String, Long> entry1: group1.entrySet()) {
-            // if give value is equal to value from entry
-            // print the corresponding key
-            if (entry1.getValue() == 2) {
-                value1 = entry1.getKey();
-                break;
-            }
-        }
-
-        for(Entry<String, Long> entry2: group2.entrySet()) {
-            // if give value is equal to value from entry
-            // print the corresponding key
-            if (entry2.getValue() == 2) {
-                value2 = entry2.getKey();
-                break;
-            }
-        }
-        int diff = VALUE.getValue(value1).score - VALUE.getValue(value2).score;
-        v1 = value1;
-        v2 = value2;
-        if (diff >0){ return p1.getName().toLowerCase();}
-            else if (diff <0 ){return p2.getName().toLowerCase();}
-            else { // same pair, then remove pair and compare value
-                List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList() );
-                List<String> s2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2)).collect(Collectors.toList() );
-                Map<String, String> winner = compareValueList (p1.getName(), s1, p2.getName(), s2);
-                return "Tie";*/
-
-                /*
-                switch (cp) {
-                    case 0:
-                        return "Tie".toLowerCase();// indicate none is higher
-                    case 1:
-                        return p1.getName().toLowerCase();
-                    case 2:
-                        return p2.getName().toLowerCase();
-                }
-            }*/
-
-        //return "";
 
 }

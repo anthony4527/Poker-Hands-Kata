@@ -58,9 +58,28 @@ public class PokerHands {
         return winner;
     }
 
-    private Map<String, String> compareHighCards(Player p1, Player p2){
-        return compareValueList (p1.getName(), Arrays.asList(p1.getValueList()), p2.getName(),
-                                                Arrays.asList(p2.getValueList()));
+    private Winner compareHighCards(Player p1, Player p2){
+
+        Map<String, String>entry = compareValueList (p1.getName(), Arrays.asList(p1.getValueList()), p2.getName(),
+                 Arrays.asList(p2.getValueList()));
+        //
+        String name ="";
+        String cValue = "";
+        for (String pname:entry.keySet()){
+            name = pname;
+            cValue = entry.get(name);
+        }
+        if (name.equals(p1.getName())){
+            Winner winner = new Winner(p1.getName(), p1.getSuitList(), p1.getValueList());
+            winner.setWinCard(cValue, 0);
+            winner.setCategory(0);  //High Card category
+            return winner;
+        }else {
+            Winner winner = new Winner(p2.getName(), p2.getSuitList(), p2.getValueList());
+            winner.setWinCard(cValue, 0);
+            winner.setCategory(0);  //High Card category
+            return winner;
+        }
     }
 
     public String compare(String first, String second){
@@ -97,23 +116,30 @@ public class PokerHands {
             Map<String,String> pair2 = findPair(players[j+1]);
 
             if ((pair1.size()!=0) && (pair2.size()==0)){
-                MessageDisplay msgDisplay = new MessageDisplay(pair1, category[1]);
+                Winner winner = new Winner(players[j].getName(), players[j].getSuitList(), players[j].getValueList());
+                winner.setWinCard(pair1.get(players[j].getName()), 0);
+                winner.setCategory(1);  // pair category
+                MessageDisplay msgDisplay = new MessageDisplay(winner);
                 return msgDisplay.print();
                 //return players[j].getName().toLowerCase();
             }else {
                 if ((pair1.size()==0) && (pair2.size()!=0) ){
 //                    return players[j+1].getName().toLowerCase();
-                    MessageDisplay msgDisplay = new MessageDisplay(pair1,category[1]);
+                    Winner winner = new Winner(players[j+1].getName(), players[j+1].getSuitList(), players[j+1].getValueList());
+                    winner.setWinCard(pair2.get(players[j+1].getName()), 0);
+                    winner.setCategory(1);  // pair category
+                    MessageDisplay msgDisplay = new MessageDisplay(winner);
+                    //MessageDisplay msgDisplay = new MessageDisplay(pair2,category[1]);
                     return msgDisplay.print();
                 } else {
                     if ((pair1.size()!=0) && (pair2.size()!=0)){
-                        Map<String, String> winner =comparePairs(players[j],players[j+1]);
-                        MessageDisplay msgDisplay = new MessageDisplay(winner,category[1]);
+                        Winner winner = comparePairs(players[j],players[j+1]);
+                        MessageDisplay msgDisplay = new MessageDisplay(winner);
                         return msgDisplay.print();
                         //return comparePairs(players[j],players[j+1]); //return name of the player with higher score
                     } else {
-                        Map<String,String> winner = compareHighCards(players[j],players[j+1]);
-                        MessageDisplay msgDisplay = new MessageDisplay(winner,category[0]);
+                        Winner winner = compareHighCards(players[j],players[j+1]);
+                        MessageDisplay msgDisplay = new MessageDisplay(winner);
                         return msgDisplay.print();
                     }
                 }
@@ -145,7 +171,7 @@ public class PokerHands {
         return pair;
     }
 
-    private Map<String, String> comparePairs(Player p1, Player p2) {
+    private Winner comparePairs(Player p1, Player p2) {
         //String value1 = "";
         //String value2 = "";
         final String v1;
@@ -157,22 +183,45 @@ public class PokerHands {
         // value1 = VALUE.getValue();
 
         v1 = pair1.get(p1.getName());
-        v2 = pair2.get(p1.getName());
+        v2 = pair2.get(p2.getName());
 
         int score1 = VALUE.getValue(v1).score;
         int score2 = VALUE.getValue(v2).score;
 
         if (score1 > score2) {
-            return pair1;
+            Winner winner = new Winner(p1.getName(), p1.getSuitList(), p1.getValueList());
+            winner.setWinCard(pair1.get(p1.getName()), 0);
+            winner.setCategory(1);  // pair category
+            return winner;
         } else if (score1 < score2) {
-            return pair2;
+            Winner winner = new Winner(p2.getName(), p2.getSuitList(), p2.getValueList());
+            winner.setWinCard(pair2.get(p2.getName()),0);
+            winner.setCategory(1);  // pair category
+            return winner;
         }
         // compare high card if players have same pairs
         List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList());
         List<String> s2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2)).collect(Collectors.toList());
-        Map<String, String> winner = compareValueList(p1.getName(), s1, p2.getName(), s2);
+        Map<String, String> entry = compareValueList(p1.getName(), s1, p2.getName(), s2);
 
-        return winner;
+        String name ="";
+        String cValue = "";
+        for (String pname:entry.keySet()){
+            name = pname;
+            cValue = entry.get(name);
+        }
+        if (name.equals(p1.getName())){
+            Winner winner = new Winner(p1.getName(), p1.getSuitList(), p1.getValueList());
+            winner.setWinCard(cValue, 0);
+            winner.setCategory(0);  //High Card category
+            return winner;
+        }else {
+            Winner winner = new Winner(p2.getName(), p2.getSuitList(), p2.getValueList());
+            winner.setWinCard(cValue, 0);
+            winner.setCategory(0);  //High Card category
+            return winner;
+        }
+
     }
 /*
         Map<String, Long> group1 = Arrays.stream(p1.getValueList()).collect(Collectors.groupingBy(

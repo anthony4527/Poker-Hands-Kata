@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PokerHandsCompareTest {
 
     @Test
+    //'White wins - with one pair: Ace','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S AC AH''White wins - with one pair: Ace','Black: 2H 3D 5S 9C 9D','White: 2C 3H 4S AC AH'
     public void compareOneHighCard(){
         PokerHands pokerhands = new PokerHands();
         String expected = "White wins - with high card: Ace";

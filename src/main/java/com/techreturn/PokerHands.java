@@ -1,6 +1,7 @@
 package com.techreturn;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -39,7 +40,9 @@ public class PokerHands {
     }
 
 
-    private int compareValueList(List<String> valueList1, List<String> valueList2) {
+    private Map<String, String> compareValueList(String p1, List<String> valueList1, String p2, List<String> valueList2) {
+
+        Map<String, String> winner = new HashMap<>();   //entry of winner with name and high card value
 
         String[] cList1 = valueList1.toArray(new String[valueList1.size()]);
         String[] cList2 = valueList2.toArray(new String[valueList2.size()]);
@@ -52,27 +55,34 @@ public class PokerHands {
         int r = 0;
         while (k< len) {
             r = getValueScore(cList1[len - k-1]) - getValueScore(cList2[len - k-1]);
-            if (r > 0){return 1;}
+            if (r > 0){
+                 winner.put(p1,cList1[len - k-1]);
+                 return winner;
+            }
             else
-            if (r <0) {return 2;}
+            if (r <0) {
+                winner.put(p2, cList2[len - k - 1]);
+                return winner;
+            }
             else k++;   //continue if same
         }
-        return 0;
+        winner.put("Tie","");
+        return winner;
     }
 
-    private String compareHighCards(Player p1, Player p2){
-        int compareResult = compareValueList (Arrays.asList(p1.getValueList()),
+    private Map<String, String> compareHighCards(Player p1, Player p2){
+        return compareValueList (p1.getName(), Arrays.asList(p1.getValueList()), p2.getName(),
                                                 Arrays.asList(p2.getValueList()));
 
-        switch (compareResult) {
+        /*switch (compareResult) {
             case 0:
                 return "Tie";// indicate none is higher
             case 1:
-                return p1.getName().toLowerCase();
+                return p1.getName();
             case 2:
-                return p2.getName().toLowerCase();
+                return p2.getName();
         }
-        return "";
+        return "";*/
     }
 
     public String compare(String first, String second){
@@ -107,8 +117,7 @@ public class PokerHands {
             //return the player which higher category
             //if same category, compare by High Card rule
             if ((isPair(players[j])) && (!isPair(players[j+1]) )){
-                MessageDisplay msgDisplay = new MessageDisplay(players[j].getName(), String value);
-                return msgDisplay.print();
+
                 //return players[j].getName().toLowerCase();
             }else {
                 if ((!isPair(players[j])) && (isPair(players[j+1])) ){
@@ -116,7 +125,13 @@ public class PokerHands {
                 } else {
                     if ((isPair(players[j])) && (isPair(players[j+1]) )){
                         return comparePairs(players[j],players[j+1]); //return name of the player with higher score
-                    } else return compareHighCards (players[j],players[j+1]);
+                    } else {
+                        Map<String,String> winner = compareHighCards(players[j],players[j+1]);
+                        //String winCard = "A";
+                        MessageDisplay msgDisplay = new MessageDisplay(winner);
+                        return msgDisplay.print();
+
+                    }
                 }
             }
 
@@ -166,7 +181,9 @@ public class PokerHands {
             else { // same pair, then remove pair and compare value
                 List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList() );
                 List<String> s2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2)).collect(Collectors.toList() );
-                int cp = compareValueList (s1, s2);
+                Map<String, String> winner = compareValueList (p1.getName(), s1, p2.getName(), s2);
+                return "Tie";
+                /*
                 switch (cp) {
                     case 0:
                         return "Tie".toLowerCase();// indicate none is higher
@@ -174,9 +191,9 @@ public class PokerHands {
                         return p1.getName().toLowerCase();
                     case 2:
                         return p2.getName().toLowerCase();
-                }
+                }*/
             }
 
-        return "";
+        //return "";
     }
 }

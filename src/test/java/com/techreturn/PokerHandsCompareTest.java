@@ -9,9 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PokerHandsCompareTest {
 
-    //@Test
+    @Test
+    public void compareOneHighCard(){
+        PokerHands pokerhands = new PokerHands();
+        String expected = "White wins - with high card: Ace";
+        String black = "Black: 2H 3D 5S 9C KD";
+        String white = "White: 2C 3H 4S 8C AH";
+        // compare method return the person name in lowercase with higher rank, or null if they are same
+        assertEquals( expected, pokerhands.compare(black, white ));
+    }
     @ParameterizedTest
-    @CsvSource({"'white','Black: 2H 3D 5S 9C KD','White: 2C 3H 4S 8C AH'",
+    @CsvSource({"'White wins - with high card: Ace','Black: 2H 3D 5S 9C KD','White: 2C 3H 4S 8C AH'",
                 "'black','Black: 2H AD 5S 9C KD','White: 2C 3H KS 8C QH'",
                 "'Tie','Black: 2H AD 5S 9C KD','White: 2C AH 9S 5C KH'",
                 "'black','Black: 2H QD 5S 9C KD','White: 2C 3H KS 8C JH'",

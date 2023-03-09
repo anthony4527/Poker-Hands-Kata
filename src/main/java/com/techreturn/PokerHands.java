@@ -1,6 +1,7 @@
 package com.techreturn;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -11,7 +12,8 @@ public class PokerHands {
 
     public final int NumOfPersons = 2;
     public final String[] valueOrder = {"1","2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-    public int lookupOrder(String value){
+    public int getValueScore(String value){
+        // use stream
         int j =0;
         while (j < valueOrder.length) {
             if (value.equals(valueOrder[j])) {
@@ -27,7 +29,7 @@ public class PokerHands {
         // bubble sort - start from 1st one, move highest one to the end
         for (int i= 0; i< count;i++) {
             for(int j=0; j < count -i-1; j++ ){
-                if (lookupOrder(cList[j]) > lookupOrder(cList[j+1]) ){
+                if (getValueScore(cList[j]) > getValueScore(cList[j+1]) ){
                     temp = cList[j];
                     cList[j] = cList[j+1];
                     cList[j+1] = temp;
@@ -37,13 +39,13 @@ public class PokerHands {
     }
 
 
-    private int compareValueList(String[] valueList1, String[] valueList2) {
+    private int compareValueList(List<String> valueList1, List<String> valueList2) {
 
-        String[] cList1 = new String[valueList1.length];
-        for (int i=0; i< valueList1.length; i++){ cList1[i]= valueList1[i];}
+        String[] cList1 = new String[valueList1.size()];
+        for (int i=0; i< valueList1.size(); i++){ cList1[i]= valueList1.get(i);}
 
-        String[] cList2 = new String[valueList2.length];
-        for (int i=0; i< valueList2.length; i++){ cList2[i]= valueList2[i];}
+        String[] cList2 = new String[valueList2.size()];
+        for (int i=0; i< valueList2.size(); i++){ cList2[i]= valueList2.get(i);}
         //reorder the two list for identifying the higher one
         orderValue(cList1);
         orderValue(cList2);
@@ -52,7 +54,7 @@ public class PokerHands {
         int len = cList1.length;
         int r = 0;
         while (k< len) {
-            r = lookupOrder(cList1[len - k-1]) - lookupOrder(cList2[len - k-1]);
+            r = getValueScore(cList1[len - k-1]) - getValueScore(cList2[len - k-1]);
             if (r > 0){return 1;}
             else
             if (r <0) {return 2;}
@@ -62,7 +64,8 @@ public class PokerHands {
     }
 
     private String compareHighCards(Player p1, Player p2){
-        int compareResult = compareValueList (p1.getValueList(), p2.getValueList());
+        int compareResult = compareValueList (Arrays.asList(p1.getValueList()),
+                                                Arrays.asList(p2.getValueList()));
 
         switch (compareResult) {
             case 0:
@@ -132,8 +135,10 @@ public class PokerHands {
     }
 
     private String comparePairs(Player p1, Player p2){
-        String value1 ="";
+        String value1 = "";
         String value2 = "";
+        final String v1;
+        final String v2;
         Map<String, Long> group1 = Arrays.stream(p1.getValueList()).collect(Collectors.groupingBy(
                 Function.identity(), Collectors.counting()));
         Map<String, Long> group2 = Arrays.stream(p2.getValueList()).collect(Collectors.groupingBy(
@@ -144,6 +149,7 @@ public class PokerHands {
             // print the corresponding key
             if (entry1.getValue() == 2) {
                 value1 = entry1.getKey();
+                break;
             }
         }
 
@@ -152,19 +158,30 @@ public class PokerHands {
             // print the corresponding key
             if (entry2.getValue() == 2) {
                 value2 = entry2.getKey();
+                break;
             }
         }
-        String[] s1 = {value1};
-        String[] s2 = {value2};
-        int cp = compareValueList (s1, s2);
-        switch (cp) {
-            case 0:
-                return "Tie";// indicate none is higher
-            case 1:
-                return p1.getName().toLowerCase();
-            case 2:
-                return p2.getName().toLowerCase();
-        }
+        int diff = getValueScore(value1) - getValueScore(value2);
+        v1 = value1;
+        v2 = value2;
+        if (diff >0){ return p1.getName().toLowerCase();}
+            else if (diff <0 ){return p2.getName().toLowerCase();}
+            else { // same pair, then remove pair and compare value
+                List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList() );
+                List<String> s2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2)).collect(Collectors.toList() );
+                int cp = compareValueList (s1, s2);
+                switch (cp) {
+                    case 0:
+                        return "Tie".toLowerCase();// indicate none is higher
+                    case 1:
+                        return p1.getName().toLowerCase();
+                    case 2:
+                        return p2.getName().toLowerCase();
+                }
+
+            }
+
+
         return "";
     }
 }

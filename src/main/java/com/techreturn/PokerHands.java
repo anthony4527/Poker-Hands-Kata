@@ -13,6 +13,7 @@ public class PokerHands {
 
     public final int NumOfPersons = 2;
     public final String[] valueOrder = {"1","2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+    /*
     public int getValueScore(String value){
         // use stream
         int j =0;
@@ -23,14 +24,14 @@ public class PokerHands {
         }
         return j;
     }
-
+*/
     private void orderValue(String[] cList) {
         String temp = "";
         int count = cList.length;
         // bubble sort - start from 1st one, move highest one to the end
         for (int i= 0; i< count;i++) {
             for(int j=0; j < count -i-1; j++ ){
-                if (getValueScore(cList[j]) > getValueScore(cList[j+1]) ){
+                if (VALUE.getValue(cList[j]).score > VALUE.getValue(cList[j+1]).score ){
                     temp = cList[j];
                     cList[j] = cList[j+1];
                     cList[j+1] = temp;
@@ -54,7 +55,7 @@ public class PokerHands {
         int len = cList1.length;
         int r = 0;
         while (k< len) {
-            r = getValueScore(cList1[len - k-1]) - getValueScore(cList2[len - k-1]);
+            r = VALUE.getValue(cList1[len - k-1]).score - VALUE.getValue(cList2[len - k-1]).score ;
             if (r > 0){
                  winner.put(p1,cList1[len - k-1]);
                  return winner;
@@ -173,7 +174,7 @@ public class PokerHands {
                 break;
             }
         }
-        int diff = getValueScore(value1) - getValueScore(value2);
+        int diff = VALUE.getValue(value1).score - VALUE.getValue(value2).score;
         v1 = value1;
         v2 = value2;
         if (diff >0){ return p1.getName().toLowerCase();}

@@ -18,7 +18,11 @@ public class MessageDisplay {
 
     public String print(){
         //format output message
-        String msg = name + " wins - with high card: "+ VALUE.getValue(cardValue).text;
+        String msg = "";
+        if (this.cardValue == "") {msg ="Tie";}
+        else {
+            msg = this.name + " wins - with high card: "+ VALUE.getValue(this.cardValue).text;
+        }
         return msg;
     }
 }

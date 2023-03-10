@@ -1,6 +1,7 @@
 package com.techreturn.Categories;
 
 
+import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class TwoPairsCategory extends PairCategory implements ICategory {
 
-    int enumTwoPair = 2;
+//    int enumTwoPair = 2;
     @Override
     public void match(Player p) {
         List<String> r = lookForPairs(p);
@@ -18,7 +19,7 @@ public class TwoPairsCategory extends PairCategory implements ICategory {
             for (String s : r) {
                 p.setCategoryCard(s);
             }
-            p.setCategory(2);
+            p.setCategory(CATEGORY.TWOPAIRS.rank);
         }// set as Two Pair Category if two cards have a pair
     }
 
@@ -44,10 +45,10 @@ public class TwoPairsCategory extends PairCategory implements ICategory {
         //iterate compare each pair of two player, until a higher pair is found
         for (int j = 0; j < 2; j++) {
             if (VALUE.getValue(s1[j]).score > VALUE.getValue(s2[j]).score) {
-                return prepareWinner(p1, enumTwoPair, Arrays.asList(s1));    //set winner as p1 with winning category as Two pairs
+                return prepareWinner(p1, CATEGORY.TWOPAIRS.rank, Arrays.asList(s1));    //set winner as p1 with winning category as Two pairs
             }
             if (VALUE.getValue(s1[j]).score < VALUE.getValue(s2[j]).score) {
-                return prepareWinner(p2, enumTwoPair, Arrays.asList(s2));    //set winner as p1 with winning category as Two pairs
+                return prepareWinner(p2, CATEGORY.TWOPAIRS.rank, Arrays.asList(s2));    //set winner as p1 with winning category as Two pairs
             }
         }
         // compare high card if players have same pairs

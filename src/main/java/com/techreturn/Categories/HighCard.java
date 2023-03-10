@@ -1,5 +1,6 @@
 package com.techreturn.Categories;
 
+import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
@@ -8,7 +9,7 @@ import java.util.*;
 
 public class HighCard {
 
-    public final int enumHighCard = 0;
+//    public final int enumHighCard = 0;
     public void orderValue(String[] cList) {
         String temp = "";
         int count = cList.length;
@@ -75,9 +76,9 @@ public class HighCard {
             wList.add(cValue);
         }
         if (name.equals(p1.getName())) {
-            return prepareWinner(p1, enumHighCard, wList); // rank by high card
+            return prepareWinner(p1, CATEGORY.HIGHCARD.rank, wList); // rank by high card
         } else if (name.equals(p2.getName())) {
-            return prepareWinner(p2, enumHighCard, wList);
+            return prepareWinner(p2, CATEGORY.HIGHCARD.rank, wList);
         }
         return null; //null means no winner i.e. a Tie
 

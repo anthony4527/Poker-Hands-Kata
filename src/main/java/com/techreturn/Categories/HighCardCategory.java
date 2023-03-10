@@ -1,5 +1,6 @@
 package com.techreturn.Categories;
 
+import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 
@@ -14,7 +15,7 @@ public class HighCardCategory extends HighCard implements ICategory {
             String[] cList = p.getValueList();
             //reorder the two list for identifying the higher one
             orderValue(cList);
-            p.setCategory(0);   //set HighCard Category
+            p.setCategory(CATEGORY.HIGHCARD.rank);   //set HighCard Category
             p.setCategoryCard(cList[cList.length-1]);
     }
 

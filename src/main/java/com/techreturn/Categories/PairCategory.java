@@ -1,5 +1,6 @@
 package com.techreturn.Categories;
 
+import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
@@ -10,14 +11,14 @@ import java.util.stream.Collectors;
 
 public class PairCategory extends HighCard implements ICategory {
 
-    public final int enumOnePair =1;
+//    public final int enumOnePair =1;
     public PairCategory(){ super();}
     @Override
     public void match(Player p) {
         List<String> r = lookForPairs(p);
         if (r.size() ==1 ){
              p.setCategoryCard(r.get(0));
-             p.setCategory(1);
+             p.setCategory(CATEGORY.PAIR.rank);
         }// set as Pair Category if only card has a pair
     }
 
@@ -51,10 +52,10 @@ public class PairCategory extends HighCard implements ICategory {
 
         if (score1 > score2) {
             wList.add(v1);
-            return prepareWinner(p1, enumOnePair, wList);
+            return prepareWinner(p1, CATEGORY.PAIR.rank, wList);
         } else if (score1 < score2) {
             wList.add(v2);
-            return prepareWinner(p2, enumOnePair, wList);
+            return prepareWinner(p2, CATEGORY.PAIR.rank, wList);
         }
         // compare high card if players have same pairs
         List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList());

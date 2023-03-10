@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class TwoPairsCategory extends PairCategory implements ICategory {
 
-//    int enumTwoPair = 2;
+
     @Override
     public void match(Player p) {
         List<String> r = lookForPairs(p);

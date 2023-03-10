@@ -5,3 +5,6 @@ White wins - with two pairs: Ace & 2,Black: 2H 3D 3S 9C 9D,White: 2C AH 2S 8C AH
 White wins - with high card: 8,Black: 2H 3D 3S 9C 9D,White: 3C 9H 9S 8C 3H
 Tie,Black: 2H 3D 3S 9C 9D,White: 2C 9H 9S 3C 3H
 Black wins - with three-of-a-kind: 3,Black: 2H 3D 3S 3C 9D,White: 6C 9H 9S 8C 5H
+Black wins - with three-of-a-kind: Jack,Black: 2H JD JS JC 9D,White: 6C 9H 9S 8C 9H
+White wins - with three-of-a-kind: King,Black: 2H JD JS JC 9D,White: KC 9H KS 8C KH
+Black wins - with three-of-a-kind: 2,Black: 2H 2D 2S JC 9D,White: KC 9H QS 9C KH

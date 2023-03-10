@@ -1,7 +1,7 @@
 package com.techreturn.View;
 
 import com.techreturn.Enum.VALUE;
-import com.techreturn.Winner;
+import com.techreturn.Players.Winner;
 
 public class MessageDisplay {
 

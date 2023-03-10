@@ -1,6 +1,8 @@
-package com.techreturn;
+package com.techreturn.Players;
 
-public class Winner extends Player{
+import com.techreturn.Players.Player;
+
+public class Winner extends Player {
     private int category=0;
     private String[] winCards = new String[2];
     public Winner(String name, char[] suit, String[] value){

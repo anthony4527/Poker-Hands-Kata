@@ -1,6 +1,7 @@
-package com.techreturn;
+package com.techreturn.Categories;
 
-import java.util.List;
+import com.techreturn.Players.Player;
+import com.techreturn.Players.Winner;
 
 public interface ICategory {
     public void match(Player player); //method to set highest cards if play's hand match a category

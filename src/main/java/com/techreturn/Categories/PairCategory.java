@@ -1,12 +1,14 @@
-package com.techreturn;
+package com.techreturn.Categories;
 
 import com.techreturn.Enum.VALUE;
+import com.techreturn.Players.Player;
+import com.techreturn.Players.Winner;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class PairCategory extends HighCard implements ICategory  {
+public class PairCategory extends HighCard implements ICategory {
 
     public PairCategory(){ super();}
     @Override

@@ -1,8 +1,9 @@
-package com.techreturn;
+package com.techreturn.Categories;
 
-import java.util.ArrayList;
+import com.techreturn.Players.Player;
+import com.techreturn.Players.Winner;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class HighCardCategory extends HighCard implements ICategory {

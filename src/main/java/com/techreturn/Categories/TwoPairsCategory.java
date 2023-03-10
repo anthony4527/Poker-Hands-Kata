@@ -50,26 +50,11 @@ public class TwoPairsCategory extends PairCategory implements ICategory {
                 return prepareWinner(p2, enumTwoPair, Arrays.asList(s2));    //set winner as p1 with winning category as Two pairs
             }
         }
-
         // compare high card if players have same pairs
         List<String> sl1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1[0]) && !s.equals(v1[1])).collect(Collectors.toList());
         List<String> sl2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2[0]) && !s.equals(v2[1])).collect(Collectors.toList());
 
-        Map<String, String> entry = compareValueList(p1.getName(), sl1, p2.getName(), sl2);
+        return findWinnerOfHigherCard( p1, sl1, p2, sl2);
 
-        String name = "";
-        String cValue = "";
-        ArrayList<String> wList = new ArrayList<>();
-        for (String pname : entry.keySet()) {
-            name = pname;
-            cValue = entry.get(name);
-            wList.add(cValue);
-        }
-        if (name.equals(p1.getName())) {
-            return prepareWinner(p1, 0, wList); // rank by high card
-        } else if (name.equals(p2.getName())) {
-            return prepareWinner(p2, 0, wList);
-        }
-        return null; //null means no winner i.e. a Tie
     }
 }

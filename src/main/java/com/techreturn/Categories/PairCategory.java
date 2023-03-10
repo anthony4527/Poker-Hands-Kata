@@ -59,21 +59,8 @@ public class PairCategory extends HighCard implements ICategory {
         // compare high card if players have same pairs
         List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList());
         List<String> s2 = Arrays.stream(p2.getValueList()).filter(s -> !s.equals(v2)).collect(Collectors.toList());
-        Map<String, String> entry = compareValueList(p1.getName(), s1, p2.getName(), s2);
 
-        String name ="";
-        String cValue = "";
-        for (String pname : entry.keySet()) {
-            name = pname;
-            cValue = entry.get(name);
-            wList.add(cValue);
-        }
-        if (name.equals(p1.getName())) {
-            return prepareWinner(p1, 0, wList); // rank by high card
-        } else if (name.equals(p2.getName())) {
-            return prepareWinner(p2, 0, wList);
-        }
-        return null; //null means no winner i.e. a Tie
+        return findWinnerOfHigherCard( p1, s1, p2, s2);
 
     }
 }

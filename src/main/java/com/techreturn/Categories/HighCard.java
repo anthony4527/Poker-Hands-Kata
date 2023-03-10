@@ -4,12 +4,11 @@ import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HighCard {
 
+    public final int enumHighCard = 0;
     public void orderValue(String[] cList) {
         String temp = "";
         int count = cList.length;
@@ -61,5 +60,27 @@ public class HighCard {
         }
         winner.setCategory(category);  // pair category
         return winner;
+    }
+
+    public Winner findWinnerOfHigherCard (Player p1, List<String> s1, Player p2, List<String> s2) {
+
+        Map<String, String> entry = compareValueList (p1.getName(), s1, p2.getName(), s2);
+
+        String name ="";
+        String cValue = "";
+        ArrayList<String> wList = new ArrayList<>();
+        for (String pname : entry.keySet()) {
+            name = pname;
+            cValue = entry.get(name);
+            wList.add(cValue);
+        }
+        if (name.equals(p1.getName())) {
+            return prepareWinner(p1, enumHighCard, wList); // rank by high card
+        } else if (name.equals(p2.getName())) {
+            return prepareWinner(p2, enumHighCard, wList);
+        }
+        return null; //null means no winner i.e. a Tie
+
+
     }
 }

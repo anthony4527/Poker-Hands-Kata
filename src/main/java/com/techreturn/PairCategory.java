@@ -26,7 +26,6 @@ public class PairCategory extends HighCard implements ICategory  {
                 break;
             }
         }
-
     }
 
     @Override

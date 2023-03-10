@@ -14,9 +14,7 @@ public class HighCardCategory extends HighCard implements ICategory {
             orderValue(cList);
             p.setCategory(0);   //set HighCard Category
             p.setCategoryCard(cList[cList.length-1]);
-//            List<String> ret = new ArrayList<>();
-//            ret.add("cList[cList.length-1]");
-//        return ret;
+
     }
 
     @Override
@@ -41,7 +39,6 @@ public class HighCardCategory extends HighCard implements ICategory {
             winner.setCategory(0);  //High Card category
             return winner;
         }
-
 
     }
 }

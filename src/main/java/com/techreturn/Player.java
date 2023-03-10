@@ -40,6 +40,7 @@ public class Player {
         this.categoryCards.add(cardValue);
     }
     public String getCategoryCard(int i){
+        if (i>  this.categoryCards.size()-1) {return null;}
         return this.categoryCards.get(i);   //return null if no more
     }
 

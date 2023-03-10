@@ -11,3 +11,6 @@ Black wins - with three-of-a-kind: 2,Black: 2H 2D 2S JC 9D,White: KC 9H QS 9C KH
 White wins - with straight: 6,Black: 2H 2D 2S JC 9D,White: 2C 3H 4S 5C 6H
 White wins - with straight: 7,Black: 8H 8D 9S 7C 6D,White: 7S 3H 4S 6C 5H
 Black wins - with straight: 10,Black: 8H TD 9S 7C 6D,White: 7S 3H 4S 6C 5H
+Tie,Black: 8H TD 9S 7C 6D,White: TS 8C 7S 6C 9H
+Black wins - with straight: Ace,Black: KH QD AS TC JD,White: KS QH TS JC 9H
+White wins - with high card: 9,Black: 8H 2D 3S 7C 6D,White: 7S 9H 5S 6C 4H

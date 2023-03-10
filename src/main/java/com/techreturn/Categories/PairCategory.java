@@ -10,39 +10,15 @@ import java.util.stream.Collectors;
 
 public class PairCategory extends HighCard implements ICategory {
 
+    public final int enumOnePair =1;
     public PairCategory(){ super();}
     @Override
     public void match(Player p) {
-        /*
-        String cardValue="";
-        String[] strList = p.getValueList();
-        Map<String, Long> group = Arrays.stream(strList).collect(Collectors.groupingBy(
-                Function.identity(), Collectors.counting()));
-        //if count =2, return entry for player name and card in pair
-        for(Map.Entry<String, Long> entry: group.entrySet()) {
-            // if give value is equal to value from entry
-            // print the corresponding key
-            if (entry.getValue() == 2L) {
-                cardValue = entry.getKey();
-                p.setCategory(1);   //set Pair Category
-                p.setCategoryCard(cardValue);
-                break;
-            }
-        }*/
         List<String> r = lookForPairs(p);
         if (r.size() ==1 ){
              p.setCategoryCard(r.get(0));
              p.setCategory(1);
         }// set as Pair Category if only card has a pair
-    }
-
-    public Winner prepareWinner(Player p, int category, List<String> vList){
-        Winner winner = new Winner(p.getName(), p.getSuitList(), p.getValueList());
-        for (int i =0; i< vList.size(); i++){
-            winner.setWinCard(vList.get(i), i);
-        }
-        winner.setCategory(category);  // pair category
-        return winner;
     }
 
     public List<String> lookForPairs(Player p){
@@ -58,8 +34,6 @@ public class PairCategory extends HighCard implements ICategory {
             if (entry.getValue() == 2L) {
                 cardValue = entry.getKey();
                 result.add(cardValue);
-                //p.setCategory(1);   //set Pair Category
-                //p.setCategoryCard(cardValue);
             }
         }
         return result;
@@ -68,6 +42,7 @@ public class PairCategory extends HighCard implements ICategory {
     @Override
     public Winner rank(Player p1, Player p2) throws Exception{
 
+        ArrayList<String> wList = new ArrayList<>();
         final String v1 = p1.getCategoryCard(0);
         final String v2 = p2.getCategoryCard(0);
 
@@ -75,15 +50,11 @@ public class PairCategory extends HighCard implements ICategory {
         int score2 = VALUE.getValue(v2).score;
 
         if (score1 > score2) {
-            Winner winner = new Winner(p1.getName(), p1.getSuitList(), p1.getValueList());
-            winner.setWinCard(v1, 0);
-            winner.setCategory(1);  // pair category
-            return winner;
+            wList.add(v1);
+            return prepareWinner(p1, enumOnePair, wList);
         } else if (score1 < score2) {
-            Winner winner = new Winner(p2.getName(), p2.getSuitList(), p2.getValueList());
-            winner.setWinCard(v2,0);
-            winner.setCategory(1);  // pair category
-            return winner;
+            wList.add(v2);
+            return prepareWinner(p2, enumOnePair, wList);
         }
         // compare high card if players have same pairs
         List<String> s1 = Arrays.stream(p1.getValueList()).filter(s -> !s.equals(v1)).collect(Collectors.toList());
@@ -92,20 +63,17 @@ public class PairCategory extends HighCard implements ICategory {
 
         String name ="";
         String cValue = "";
-        for (String pname:entry.keySet()){
+        for (String pname : entry.keySet()) {
             name = pname;
             cValue = entry.get(name);
+            wList.add(cValue);
         }
-        if (name.equals(p1.getName())){
-            Winner winner = new Winner(p1.getName(), p1.getSuitList(), p1.getValueList());
-            winner.setWinCard(cValue, 0);
-            winner.setCategory(0);  //High Card category
-            return winner;
-        }else {
-            Winner winner = new Winner(p2.getName(), p2.getSuitList(), p2.getValueList());
-            winner.setWinCard(cValue, 0);
-            winner.setCategory(0);  //High Card category
-            return winner;
+        if (name.equals(p1.getName())) {
+            return prepareWinner(p1, 0, wList); // rank by high card
+        } else if (name.equals(p2.getName())) {
+            return prepareWinner(p2, 0, wList);
         }
+        return null; //null means no winner i.e. a Tie
+
     }
 }

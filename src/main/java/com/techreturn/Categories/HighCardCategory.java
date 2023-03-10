@@ -3,6 +3,7 @@ package com.techreturn.Categories;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -25,21 +26,19 @@ public class HighCardCategory extends HighCard implements ICategory {
         //
         String name ="";
         String cValue = "";
-        for (String pname:entry.keySet()){
+        ArrayList<String> wList = new ArrayList<>();
+        for (String pname : entry.keySet()) {
             name = pname;
             cValue = entry.get(name);
+            wList.add(cValue);
         }
-        if (name.equals(p1.getName())){
-            Winner winner = new Winner(p1.getName(), p1.getSuitList(), p1.getValueList());
-            winner.setWinCard(cValue, 0);
-            winner.setCategory(0);  //High Card category
-            return winner;
-        }else {
-            Winner winner = new Winner(p2.getName(), p2.getSuitList(), p2.getValueList());
-            winner.setWinCard(cValue, 0);
-            winner.setCategory(0);  //High Card category
-            return winner;
+        if (name.equals(p1.getName())) {
+            return prepareWinner(p1, 0, wList); // rank by high card
+        } else if (name.equals(p2.getName())) {
+            return prepareWinner(p2, 0, wList);
         }
+        return null; //null means no winner i.e. a Tie
+
 
     }
 }

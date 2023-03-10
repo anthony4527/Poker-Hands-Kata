@@ -1,6 +1,8 @@
 package com.techreturn.Categories;
 
 import com.techreturn.Enum.VALUE;
+import com.techreturn.Players.Player;
+import com.techreturn.Players.Winner;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +51,15 @@ public class HighCard {
             else k++;   //continue if same
         }
         winner.put("Tie","");
+        return winner;
+    }
+
+    public Winner prepareWinner(Player p, int category, List<String> vList){
+        Winner winner = new Winner(p.getName(), p.getSuitList(), p.getValueList());
+        for (int i =0; i< vList.size(); i++){
+            winner.setWinCard(vList.get(i), i);
+        }
+        winner.setCategory(category);  // pair category
         return winner;
     }
 }

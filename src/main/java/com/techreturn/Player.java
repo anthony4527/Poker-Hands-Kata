@@ -1,10 +1,15 @@
 package com.techreturn;
 
+import java.util.ArrayList;
+
 public class Player {
     private String name;
     private char[] suitList = new char[5];
     private String[] valueList = new String[5];
-
+    //set the result of category matching
+    private int category = 0;   //default is high card
+    private ArrayList<String> categoryCards = new ArrayList<String>();
+    //methods
     public String getName(){ return this.name;}
 
     public char[] getSuitList(){
@@ -22,6 +27,20 @@ public class Player {
            vStr[i] = this.valueList[i];
         }
         return vStr;
+    }
+    public int getCategory(){
+        return this.category;
+    }
+
+    public void setCategory(int category){
+        this.category = category;
+    }
+
+    public void setCategoryCard(String cardValue){
+        this.categoryCards.add(cardValue);
+    }
+    public String getCategoryCard(int i){
+        return this.categoryCards.get(i);   //return null if no more
     }
 
 

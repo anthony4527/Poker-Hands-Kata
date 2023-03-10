@@ -9,7 +9,8 @@ public class MessageDisplay {
             "high card: #",
             "one pair: #",
             "two pairs: # & #",
-            "three-of-a-kind: #"
+            "three-of-a-kind: #",
+            "straight: #"
     };
     private String name;
     private String[] cardValue = new String[2];

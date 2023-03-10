@@ -24,11 +24,13 @@ public class PokerHands {
         ICategory highCard = new HighCardCategory();
         ICategory twoPairs = new TwoPairsCategory();
         ICategory threeOfAKind = new ThreeOfAKind();
+        ICategory straight = new Straight();
 
         matchList.add(highCard);    //insert from low categoty to high categories
         matchList.add(pair);
         matchList.add(twoPairs);
         matchList.add(threeOfAKind);
+        matchList.add(straight);
 
         //create players' instance
         String tempInfo[] = new String[6]; //store name and 5 pokers on hand

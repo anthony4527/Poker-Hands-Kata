@@ -14,7 +14,7 @@ public class TwoPairsCategory extends PairCategory implements ICategory {
 
     @Override
     public void match(Player p) {
-        List<String> r = lookForPairs(p);
+        List<String> r = lookForMultiple(p, 2L);
         if (r.size() == 2) {
             for (String s : r) {
                 p.setCategoryCard(s);

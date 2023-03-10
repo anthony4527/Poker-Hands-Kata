@@ -6,7 +6,7 @@ import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 
 import java.util.*;
-import java.util.function.Function;
+
 import java.util.stream.Collectors;
 
 public class PairCategory extends HighCard implements ICategory {
@@ -15,29 +15,11 @@ public class PairCategory extends HighCard implements ICategory {
     public PairCategory(){ super();}
     @Override
     public void match(Player p) {
-        List<String> r = lookForPairs(p);
+        List<String> r = lookForMultiple(p, 2L);
         if (r.size() ==1 ){
              p.setCategoryCard(r.get(0));
              p.setCategory(CATEGORY.PAIR.rank);
         }// set as Pair Category if only card has a pair
-    }
-
-    public List<String> lookForPairs(Player p){
-        String cardValue="";
-        List<String> result = new ArrayList<>();
-        String[] strList = p.getValueList();
-        Map<String, Long> group = Arrays.stream(strList).collect(Collectors.groupingBy(
-                Function.identity(), Collectors.counting()));
-        //if count =2, return entry for player name and card in pair
-        for(Map.Entry<String, Long> entry: group.entrySet()) {
-            // if give value is equal to value from entry
-            // print the corresponding key
-            if (entry.getValue() == 2L) {
-                cardValue = entry.getKey();
-                result.add(cardValue);
-            }
-        }
-        return result;
     }
 
     @Override

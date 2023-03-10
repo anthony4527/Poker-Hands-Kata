@@ -93,8 +93,13 @@ public class PokerHands {
         return (winner);
     }
     private String announce(Winner w) {
-        MessageDisplay msgDisplay = new MessageDisplay(w);
-        return msgDisplay.print();
-    }
+        if (w == null){
+            return "Tie";
+        }else
+        {
+            MessageDisplay msgDisplay = new MessageDisplay(w);
+            return msgDisplay.print();
+        }
 
+    }
 }

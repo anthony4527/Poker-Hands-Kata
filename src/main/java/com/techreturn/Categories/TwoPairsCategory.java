@@ -71,6 +71,6 @@ public class TwoPairsCategory extends PairCategory implements ICategory {
         } else if (name.equals(p2.getName())) {
             return prepareWinner(p2, 0, wList);
         }
-        return null;
+        return null; //null means no winner i.e. a Tie
     }
 }

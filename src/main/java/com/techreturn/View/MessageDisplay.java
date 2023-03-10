@@ -8,7 +8,9 @@ public class MessageDisplay {
     final String[] phrase = {
             "high card: #",
             "one pair: #",
-            "two pairs: # & #"};
+            "two pairs: # & #",
+            "three-of-a-kind: #"
+    };
     private String name;
     private String[] cardValue = new String[2];
 

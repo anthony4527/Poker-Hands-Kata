@@ -1,9 +1,6 @@
 package com.techreturn;
 
-import com.techreturn.Categories.HighCardCategory;
-import com.techreturn.Categories.ICategory;
-import com.techreturn.Categories.PairCategory;
-import com.techreturn.Categories.TwoPairsCategory;
+import com.techreturn.Categories.*;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 import com.techreturn.View.MessageDisplay;
@@ -26,10 +23,12 @@ public class PokerHands {
         ICategory pair = new PairCategory();
         ICategory highCard = new HighCardCategory();
         ICategory twoPairs = new TwoPairsCategory();
+        ICategory threeOfAKind = new ThreeOfAKind();
 
         matchList.add(highCard);    //insert from low categoty to high categories
         matchList.add(pair);
         matchList.add(twoPairs);
+        matchList.add(threeOfAKind);
 
         //create players' instance
         String tempInfo[] = new String[6]; //store name and 5 pokers on hand

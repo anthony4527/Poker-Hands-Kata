@@ -6,6 +6,8 @@ import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class HighCard {
 
@@ -82,6 +84,23 @@ public class HighCard {
         }
         return null; //null means no winner i.e. a Tie
 
+    }
 
+    public List<String> lookForMultiple(Player p, long count){
+        String cardValue="";
+        List<String> result = new ArrayList<>();
+        String[] strList = p.getValueList();
+        Map<String, Long> group = Arrays.stream(strList).collect(Collectors.groupingBy(
+                Function.identity(), Collectors.counting()));
+        //if count =2, return entry for player name and card in pair
+        for(Map.Entry<String, Long> entry: group.entrySet()) {
+            // if give value is equal to value from entry
+            // print the corresponding key
+            if (entry.getValue() == count) {
+                cardValue = entry.getKey();
+                result.add(cardValue);
+            }
+        }
+        return result;
     }
 }

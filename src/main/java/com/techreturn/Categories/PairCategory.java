@@ -13,6 +13,7 @@ public class PairCategory extends HighCard implements ICategory {
     public PairCategory(){ super();}
     @Override
     public void match(Player p) {
+        /*
         String cardValue="";
         String[] strList = p.getValueList();
         Map<String, Long> group = Arrays.stream(strList).collect(Collectors.groupingBy(
@@ -27,7 +28,32 @@ public class PairCategory extends HighCard implements ICategory {
                 p.setCategoryCard(cardValue);
                 break;
             }
+        }*/
+        List<String> r = lookForPairs(p);
+        if (r.size() ==1 ){
+             p.setCategoryCard(r.get(0));
+             p.setCategory(1);
+        }// set as Pair Category if only card has a pair
+    }
+
+    public List<String> lookForPairs(Player p){
+        String cardValue="";
+        List<String> result = new ArrayList<>();
+        String[] strList = p.getValueList();
+        Map<String, Long> group = Arrays.stream(strList).collect(Collectors.groupingBy(
+                Function.identity(), Collectors.counting()));
+        //if count =2, return entry for player name and card in pair
+        for(Map.Entry<String, Long> entry: group.entrySet()) {
+            // if give value is equal to value from entry
+            // print the corresponding key
+            if (entry.getValue() == 2L) {
+                cardValue = entry.getKey();
+                result.add(cardValue);
+                //p.setCategory(1);   //set Pair Category
+                //p.setCategoryCard(cardValue);
+            }
         }
+        return result;
     }
 
     @Override

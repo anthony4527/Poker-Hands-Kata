@@ -1,3 +1,4 @@
 expected,black,white
 Black wins - with one pair: 9,Black: 2H 3D 5S 9C 9D,White: 2C 3H 4S 8C AH
 Black wins - with two pairs: 3 & 9,Black: 2H 3D 3S 9C 9D,White: 2C AH 4S 8C AH
+White wins - with two pairs: Ace & 2,Black: 2H 3D 3S 9C 9D,White: 2C AH 2S 8C AH

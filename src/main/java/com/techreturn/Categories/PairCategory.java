@@ -36,6 +36,15 @@ public class PairCategory extends HighCard implements ICategory {
         }// set as Pair Category if only card has a pair
     }
 
+    public Winner prepareWinner(Player p, int category, List<String> vList){
+        Winner winner = new Winner(p.getName(), p.getSuitList(), p.getValueList());
+        for (int i =0; i< vList.size(); i++){
+            winner.setWinCard(vList.get(i), i);
+        }
+        winner.setCategory(category);  // pair category
+        return winner;
+    }
+
     public List<String> lookForPairs(Player p){
         String cardValue="";
         List<String> result = new ArrayList<>();

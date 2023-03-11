@@ -30,3 +30,4 @@ White wins - with four-of-a-kind: King,Black: AH AS 2H AC 2D,White: 7D KS KD KC 
 Black wins - with four-of-a-kind: Ace,Black: AH AS AC AC 2D,White: 7D KS KD KC 7H
 White wins - with four-of-a-kind: King,Black: TH TS TC TC 2D,White: 7D KS KD KC KH
 Black wins - with four-of-a-kind: 10,Black: TH TS TC TC 2D,White: 7D 9S 9D 9C 9H
+White wins - with straight flush: 9 diamond,Black: TH TS TC TC 2D,White: 7D 9D 6D 8D 5D

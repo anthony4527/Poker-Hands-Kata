@@ -29,6 +29,9 @@ public class PokerHands {
         ICategory flush = new FlushCategory();
         ICategory fullHouse = new FullHouseCategory();
         ICategory fourOfAKind = new FourOfAKindCategory();
+        ICategory straightFlush = new StraightFlushCategory();
+
+
 
         matchList.add(highCard);    //insert from low categoty to high categories
         matchList.add(pair);
@@ -38,7 +41,7 @@ public class PokerHands {
         matchList.add(flush);
         matchList.add(fullHouse);
         matchList.add(fourOfAKind);
-
+        matchList.add(straightFlush);
         //create players' instance
         String tempInfo[] = new String[6]; //store name and 5 pokers on hand
         //convert each input string to name and the suit and the number
@@ -98,7 +101,7 @@ public class PokerHands {
                 winner.setWinCard(p.getCategoryCard(j), j);
             }
         }
-        if (p.getCategory() == CATEGORY.FLUSH.rank) {winner.setWinSuit(p.getSuitList()[0]);}
+        if ((p.getCategory() == CATEGORY.FLUSH.rank) || (p.getCategory() == CATEGORY.STRAIGHTFLUSH.rank)) {winner.setWinSuit(p.getSuitList()[0]);}
         return (winner);
     }
     private String announce(Winner w) {

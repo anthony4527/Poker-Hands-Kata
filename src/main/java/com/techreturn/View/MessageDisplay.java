@@ -15,7 +15,8 @@ public class MessageDisplay {
             "straight: #",
             "flush: #",
             "full house: # over #",
-            "four-of-a-kind: #"
+            "four-of-a-kind: #",
+            "straight flush: # #"
     };
     private String name;
     private String[] cardValue = new String[2];
@@ -43,6 +44,10 @@ public class MessageDisplay {
                 }else   msg = this.name + " wins - with "+ parts[0] + VALUE.getValue(this.cardValue[0]).text;
 
             } else if (parts.length == 2) {
+                if (category == CATEGORY.STRAIGHTFLUSH.rank){
+                    msg = this.name + " wins - with "+ parts[0] +VALUE.getValue(this.cardValue[0]).text +
+                            parts[1]+ SUIT.getValue(this.winSuit).text;
+                }else
                 msg = this.name + " wins - with "+ parts[0] + VALUE.getValue(this.cardValue[0]).text +
                                         parts[1] + VALUE.getValue(this.cardValue[1]).text;
             }

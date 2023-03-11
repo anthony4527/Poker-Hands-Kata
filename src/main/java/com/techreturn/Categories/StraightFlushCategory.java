@@ -1,4 +1,4 @@
-package com.techreturn;
+package com.techreturn.Categories;
 
 import com.techreturn.Categories.HighCard;
 import com.techreturn.Categories.ICategory;
@@ -38,6 +38,7 @@ public class StraightFlushCategory extends HighCard implements ICategory {
 
     @Override
     public Winner rank(Player p1, Player p2) throws Exception {
-        return null;
+        return (compareHighestCard(p1,p2, CATEGORY.STRAIGHTFLUSH.rank));
+
     }
 }

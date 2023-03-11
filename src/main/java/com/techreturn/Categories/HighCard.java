@@ -62,6 +62,8 @@ public class HighCard {
             winner.setWinCard(vList.get(i), i);
         }
         winner.setCategory(category);  // pair category
+        if ((category ==CATEGORY.FLUSH.rank) || (category == CATEGORY.STRAIGHTFLUSH.rank))
+                winner.setWinSuit(p.getSuitList()[0]);
         return winner;
     }
 
@@ -118,7 +120,7 @@ public class HighCard {
         } else if (score1 < score2) {
             wList.add(v2);
             return prepareWinner(p2, category, wList);
-        } else System.out.println ("Unexpected - both players have same highest card");
+        } else //System.out.println ("Unexpected - both players have same highest card");
         //not possible for both players have same three-of-a-king
         return null; //throw exception later on
     }

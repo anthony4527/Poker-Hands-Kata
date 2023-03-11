@@ -106,6 +106,5 @@ public class PokerHands {
             MessageDisplay msgDisplay = new MessageDisplay(w);
             return msgDisplay.print();
         }
-
     }
 }

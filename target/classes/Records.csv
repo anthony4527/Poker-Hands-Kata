@@ -19,3 +19,5 @@ White wins - with high card: 9,Black: 8H 2H 3H 7H 6S,White: 7S 2D 9S 6C 4H
 White wins - with flush: spade,Black: 8H 8D 8S 7H 6S,White: 7S 2S 9S JS 4S
 White wins - with flush: club,Black: 8H 8D 8S 7H 6S,White: 7C AC 9C JC 4C
 White wins - with flush: diamond,Black: 8H 8D 2S AH AS,White: 7D AD 9D JD 4D
+Black wins - with high card: Ace,Black: 8H 3H 2H AH JH,White: 7D KD 9D JD 4D
+White wins - with high card: King,Black: 8H 3H 2H QH JH,White: 7D KD 9D JD 4D

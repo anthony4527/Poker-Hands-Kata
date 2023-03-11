@@ -28,3 +28,5 @@ White wins - with full house: King over 7,Black: JH JS 2H JC 2D,White: 7D KD KS 
 Black wins - with full house: 4 over Ace,Black: AH AS 4S 4C 4D,White: 7C 3C 3H 3S 7D
 White wins - with four-of-a-kind: King,Black: AH AS 2H AC 2D,White: 7D KS KD KC KH
 Black wins - with four-of-a-kind: Ace,Black: AH AS AC AC 2D,White: 7D KS KD KC 7H
+White wins - with four-of-a-kind: King,Black: TH TS TC TC 2D,White: 7D KS KD KC KH
+Black wins - with four-of-a-kind: 10,Black: TH TS TC TC 2D,White: 7D 9S 9D 9C 9H

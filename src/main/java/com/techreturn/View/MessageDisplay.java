@@ -13,7 +13,8 @@ public class MessageDisplay {
             "two pairs: # & #",
             "three-of-a-kind: #",
             "straight: #",
-            "flush: #"
+            "flush: #",
+            "full house: # over #"
     };
     private String name;
     private String[] cardValue = new String[2];

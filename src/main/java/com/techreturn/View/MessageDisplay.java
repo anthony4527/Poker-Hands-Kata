@@ -14,7 +14,8 @@ public class MessageDisplay {
             "three-of-a-kind: #",
             "straight: #",
             "flush: #",
-            "full house: # over #"
+            "full house: # over #",
+            "four-of-a-kind: #"
     };
     private String name;
     private String[] cardValue = new String[2];

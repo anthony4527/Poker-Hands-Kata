@@ -28,7 +28,7 @@ public class PokerHands {
         ICategory straight = new StraightCategory();
         ICategory flush = new FlushCategory();
         ICategory fullHouse = new FullHouseCategory();
-
+        ICategory fourOfAKind = new FourOfAKindCategory();
 
         matchList.add(highCard);    //insert from low categoty to high categories
         matchList.add(pair);
@@ -37,6 +37,7 @@ public class PokerHands {
         matchList.add(straight);
         matchList.add(flush);
         matchList.add(fullHouse);
+        matchList.add(fourOfAKind);
 
         //create players' instance
         String tempInfo[] = new String[6]; //store name and 5 pokers on hand

@@ -103,4 +103,23 @@ public class HighCard {
         }
         return result;
     }
+
+    public Winner compareHighestCard(Player p1, Player p2, int category) throws Exception {
+        ArrayList<String> wList = new ArrayList<>();
+        final String v1 = p1.getCategoryCard(0);    //the highest card is placed in the 1st entry of trump cards
+        final String v2 = p2.getCategoryCard(0);
+
+        int score1 = VALUE.getValue(v1).score;
+        int score2 = VALUE.getValue(v2).score;
+
+        if (score1 > score2) {
+            wList.add(v1);
+            return prepareWinner(p1, category, wList);
+        } else if (score1 < score2) {
+            wList.add(v2);
+            return prepareWinner(p2, category, wList);
+        } else System.out.println ("Unexpected - both players have same highest card");
+        //not possible for both players have same three-of-a-king
+        return null; //throw exception later on
+    }
 }

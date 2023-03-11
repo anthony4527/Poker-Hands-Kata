@@ -23,3 +23,5 @@ Black wins - with high card: Ace,Black: 8H 3H 2H AH JH,White: 7D KD 9D JD 4D
 White wins - with high card: King,Black: 8H 3H 2H QH JH,White: 7D KD 9D JD 4D
 Tie,Black: 8H 3H 2H QH JH,White: 8D 2D QD JD 3D
 Black wins - with full house: 8 over 2,Black: 8H 8S 2H 8C 2D,White: 7D KD 9D JD 4D
+Black wins - with full house: Ace over 2,Black: AH AS 2H AC 2D,White: 7D 9D 9D 9D 4D
+White wins - with full house: King over 7,Black: JH JS 2H JC 2D,White: 7D KD KD KD 7D

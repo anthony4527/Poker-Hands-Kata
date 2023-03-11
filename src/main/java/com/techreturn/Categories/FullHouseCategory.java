@@ -3,9 +3,11 @@ package com.techreturn.Categories;
 import com.techreturn.Categories.HighCard;
 import com.techreturn.Categories.ICategory;
 import com.techreturn.Enum.CATEGORY;
+import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FullHouseCategory extends HighCard implements ICategory {
@@ -23,6 +25,27 @@ public class FullHouseCategory extends HighCard implements ICategory {
 
     @Override
     public Winner rank(Player p1, Player p2) throws Exception {
-        return null;
+        List<String> wList = new ArrayList<>();
+        String[] matchCard = new String[2];
+
+        List<String> p1card = lookForMultiple(p1, 3L);
+        matchCard[0] =p1card.get(0);
+        List<String> p2card = lookForMultiple(p2, 3L);
+        matchCard[1] = p2card.get(0);
+
+        int diff = VALUE.getValue(matchCard[0]).score - VALUE.getValue(matchCard[1]).score;
+        if (diff > 0) {
+            wList.add(matchCard[0]);
+            String minorCard = lookForMultiple(p1, 2L).get(0);
+            wList.add(minorCard);
+            return prepareWinner(p1, CATEGORY.FULLHOUSE.rank, wList);
+        } else if (diff <0) {
+            wList.add(matchCard[1]);
+            String minorCard = lookForMultiple(p2, 2L).get(0);
+            wList.add(minorCard);
+            return prepareWinner(p2, CATEGORY.FULLHOUSE.rank, wList);
+             }
+        else return null; //Tie if none is bigger
+
     }
 }

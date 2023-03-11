@@ -1,6 +1,5 @@
 package com.techreturn.Categories;
 
-import com.techreturn.Categories.ICategory;
 import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
@@ -9,7 +8,7 @@ import com.techreturn.Enum.VALUE;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Straight extends HighCard implements ICategory {
+public class StraightCategory extends HighCard implements ICategory {
     @Override
     public void match(Player p) {
         String[] sList = p.getValueList();

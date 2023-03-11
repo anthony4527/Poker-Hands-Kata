@@ -1,6 +1,8 @@
 package com.techreturn.View;
 
+import com.techreturn.Enum.SUIT;
 import com.techreturn.Enum.VALUE;
+import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Players.Winner;
 
 public class MessageDisplay {
@@ -10,10 +12,12 @@ public class MessageDisplay {
             "one pair: #",
             "two pairs: # & #",
             "three-of-a-kind: #",
-            "straight: #"
+            "straight: #",
+            "flush: #"
     };
     private String name;
     private String[] cardValue = new String[2];
+    private char winSuit;
 
     private int category;
     public MessageDisplay (Winner winner){
@@ -22,6 +26,7 @@ public class MessageDisplay {
         for (int i =0; i < cardValue.length ; i++){
          cardValue[i] = winner.getWinCard(i);
         }
+        this.winSuit = winner.getWinSuit();
     }
 
     public String print(){
@@ -31,7 +36,10 @@ public class MessageDisplay {
         else {
             String[] parts =  phrase[category].split("#");
             if (parts.length == 1){
-                msg = this.name + " wins - with "+ parts[0] + VALUE.getValue(this.cardValue[0]).text;
+                if (category == CATEGORY.FLUSH.rank){
+                    msg = this.name + " wins - with "+ parts[0] + SUIT.getValue(this.winSuit).text;
+                }else   msg = this.name + " wins - with "+ parts[0] + VALUE.getValue(this.cardValue[0]).text;
+
             } else if (parts.length == 2) {
                 msg = this.name + " wins - with "+ parts[0] + VALUE.getValue(this.cardValue[0]).text +
                                         parts[1] + VALUE.getValue(this.cardValue[1]).text;

@@ -1,6 +1,7 @@
 package com.techreturn;
 
 import com.techreturn.Categories.*;
+import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 import com.techreturn.View.MessageDisplay;
@@ -24,13 +25,16 @@ public class PokerHands {
         ICategory highCard = new HighCardCategory();
         ICategory twoPairs = new TwoPairsCategory();
         ICategory threeOfAKind = new ThreeOfAKind();
-        ICategory straight = new Straight();
+        ICategory straight = new StraightCategory();
+        ICategory flush = new FlushCategory();
+
 
         matchList.add(highCard);    //insert from low categoty to high categories
         matchList.add(pair);
         matchList.add(twoPairs);
         matchList.add(threeOfAKind);
         matchList.add(straight);
+        matchList.add(flush);
 
         //create players' instance
         String tempInfo[] = new String[6]; //store name and 5 pokers on hand
@@ -91,6 +95,7 @@ public class PokerHands {
                 winner.setWinCard(p.getCategoryCard(j), j);
             }
         }
+        if (p.getCategory() == CATEGORY.FLUSH.rank) {winner.setWinSuit(p.getSuitList()[0]);}
         return (winner);
     }
     private String announce(Winner w) {

@@ -55,4 +55,13 @@ public class PokerHandsCompareTest {
 
         assertEquals( expected, pokerhands.compare(black, white ));
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/InvalidRecords.csv", numLinesToSkip = 1)
+
+    public void testValidateInput(String expected, String black, String white) {
+        PokerHands pokerhands = new PokerHands();
+
+        assertEquals( expected, pokerhands.compare(black, white ));
+    }
 }

@@ -2,6 +2,8 @@ package com.techreturn;
 
 import com.techreturn.Categories.*;
 import com.techreturn.Enum.CATEGORY;
+import com.techreturn.Enum.SUIT;
+import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 import com.techreturn.View.MessageDisplay;
@@ -41,8 +43,12 @@ public class PokerHands {
 
         //Setup players poker hands for comparison
 
-        players[0] = setUp(first);
-        players[1] = setUp(second);
+        try {
+            players[0] = setUp(first);
+            players[1] = setUp(second);
+        }catch (Exception e){
+            return (e.getMessage());
+        }
 
         //call an interface to categoty matcher for each player
         // then compare based on different categories or same categories
@@ -75,10 +81,10 @@ public class PokerHands {
         }catch (Exception e){
             System.out.println("Error in comparing score of same category: "+e.getMessage());
         }
-            return("no result identified!!");
+            return("no result identified!!"); //if exception occurs and winner not returned by all compariosn
     }
 
-    Player setUp(String cardsInput){
+    Player setUp(String cardsInput) throws Exception{
         //setup the cards of a player and validate the input cards value
         char[] suitList = new char[NumOfCards];
         String[] valueList = new String[NumOfCards];
@@ -87,12 +93,20 @@ public class PokerHands {
         String[] tempInfo = cardsInput.split(" ");
         //extract all suits into suitList
         //extract all values into valueList
+        //Validate and throw exception
+        if (tempInfo.length> (NumOfCards + 1))
+            throw new Exception("??Incorrect number of cards - "+cardsInput);
+
         for (int j = 0; j < NumOfCards; j++) {
             strLen = tempInfo[j + 1].length();
             suitList[j] = tempInfo[j + 1].charAt(strLen - 1);
+            if (SUIT.getValue(suitList[j]) == null)
+                throw new Exception("??Invalid suit - "+suitList[j]);
             valueList[j] = tempInfo[j + 1].substring(0, strLen - 1);
+            if (VALUE.getValue(valueList[j]) == null)
+                throw new Exception("??Invalid card value - "+valueList[j]);
         }
-        tempInfo[0] = tempInfo[0].substring(0, tempInfo[0].length() - 1);
+        tempInfo[0] = tempInfo[0].substring(0, tempInfo[0].length() - 1);//name of player
         Player player = new Player(tempInfo[0], suitList, valueList);
 
         return player;

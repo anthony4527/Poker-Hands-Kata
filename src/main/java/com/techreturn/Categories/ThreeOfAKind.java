@@ -1,15 +1,13 @@
 package com.techreturn.Categories;
 
-import com.techreturn.Categories.ICategory;
 import com.techreturn.Enum.CATEGORY;
-import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
+import com.techreturn.Tools.PokerTools;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ThreeOfAKind extends HighCard implements ICategory {
+public class ThreeOfAKind extends PokerTools implements ICategory {
     @Override
     public void match(Player p) {
         List<String> r = lookForMultiple(p, 3L);

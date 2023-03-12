@@ -4,12 +4,13 @@ import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
+import com.techreturn.Tools.PokerTools;
 
 import java.util.*;
 
 import java.util.stream.Collectors;
 
-public class PairCategory extends HighCard implements ICategory {
+public class PairCategory extends PokerTools implements ICategory {
 
 //    public final int enumOnePair =1;
     public PairCategory(){ super();}

@@ -1,4 +1,4 @@
-package com.techreturn.Categories;
+package com.techreturn.Tools;
 
 import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Enum.VALUE;
@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class HighCard {
+public class PokerTools {
 
 //    public final int enumHighCard = 0;
     public void orderValue(String[] cList) {

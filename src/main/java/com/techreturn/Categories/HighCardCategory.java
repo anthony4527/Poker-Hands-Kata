@@ -3,12 +3,11 @@ package com.techreturn.Categories;
 import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
+import com.techreturn.Tools.PokerTools;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
-public class HighCardCategory extends HighCard implements ICategory {
+public class HighCardCategory extends PokerTools implements ICategory {
         @Override
     public void match(Player p) {
         //return the highest card

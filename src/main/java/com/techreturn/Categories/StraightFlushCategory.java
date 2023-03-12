@@ -1,13 +1,12 @@
 package com.techreturn.Categories;
 
-import com.techreturn.Categories.HighCard;
-import com.techreturn.Categories.ICategory;
+import com.techreturn.Tools.PokerTools;
 import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 
-public class StraightFlushCategory extends HighCard implements ICategory {
+public class StraightFlushCategory extends PokerTools implements ICategory {
 
     @Override
     public void match(Player p) {

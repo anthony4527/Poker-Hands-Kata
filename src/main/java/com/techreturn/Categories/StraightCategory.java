@@ -4,11 +4,12 @@ import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
 import com.techreturn.Enum.VALUE;
+import com.techreturn.Tools.PokerTools;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StraightCategory extends HighCard implements ICategory {
+public class StraightCategory extends PokerTools implements ICategory {
     @Override
     public void match(Player p) {
         String[] sList = p.getValueList();

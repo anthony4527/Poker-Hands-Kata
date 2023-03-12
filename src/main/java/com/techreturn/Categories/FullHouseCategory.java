@@ -1,7 +1,6 @@
 package com.techreturn.Categories;
 
-import com.techreturn.Categories.HighCard;
-import com.techreturn.Categories.ICategory;
+import com.techreturn.Tools.PokerTools;
 import com.techreturn.Enum.CATEGORY;
 import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
@@ -10,7 +9,7 @@ import com.techreturn.Players.Winner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FullHouseCategory extends HighCard implements ICategory {
+public class FullHouseCategory extends PokerTools implements ICategory {
     @Override
     public void match(Player p) {
         List<String> match3 = lookForMultiple(p, 3L);

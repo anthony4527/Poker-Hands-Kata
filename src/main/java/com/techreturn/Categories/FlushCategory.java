@@ -1,15 +1,13 @@
 package com.techreturn.Categories;
 
 import com.techreturn.Enum.CATEGORY;
-import com.techreturn.Enum.VALUE;
 import com.techreturn.Players.Player;
 import com.techreturn.Players.Winner;
+import com.techreturn.Tools.PokerTools;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class FlushCategory extends HighCard implements ICategory {
+public class FlushCategory extends PokerTools implements ICategory {
     @Override
     public void match(Player p) {
         int i=0;

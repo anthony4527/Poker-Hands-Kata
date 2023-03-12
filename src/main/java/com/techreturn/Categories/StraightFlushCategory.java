@@ -32,7 +32,6 @@ public class StraightFlushCategory extends PokerTools implements ICategory {
             p.setCategoryCard(sList[listSize-1]);
             p.setCategory(CATEGORY.STRAIGHTFLUSH.rank);
         }
-
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class PairCategory extends PokerTools implements ICategory {
 
-//    public final int enumOnePair =1;
+
     public PairCategory(){ super();}
     @Override
     public void match(Player p) {

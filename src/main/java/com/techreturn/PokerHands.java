@@ -42,7 +42,6 @@ public class PokerHands {
         matchList.add(straightFlush);
 
         //Setup players poker hands for comparison
-
         try {
             players[0] = setUp(first);
             players[1] = setUp(second);

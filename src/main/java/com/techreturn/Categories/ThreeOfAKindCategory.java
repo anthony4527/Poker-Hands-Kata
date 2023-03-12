@@ -7,7 +7,7 @@ import com.techreturn.Tools.PokerTools;
 
 import java.util.List;
 
-public class ThreeOfAKind extends PokerTools implements ICategory {
+public class ThreeOfAKindCategory extends PokerTools implements ICategory {
     @Override
     public void match(Player p) {
         List<String> r = lookForMultiple(p, 3L);

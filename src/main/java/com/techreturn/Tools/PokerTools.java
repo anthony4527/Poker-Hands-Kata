@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 public class PokerTools {
 
-//    public final int enumHighCard = 0;
     public void orderValue(String[] cList) {
         String temp = "";
         int count = cList.length;

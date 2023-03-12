@@ -10,15 +10,12 @@ import java.util.ArrayList;
 
 public class PokerHands {
     public final int NumOfPersons = 2;
+    public final int NumOfCards =5;
     public final int NumOfTrumpCards = 2; //Maxinum no. of trump cards for ranking
 
     public String compare(String first, String second) {
-
-        //String cardsInput[] = {first, second};    //keep each player's input cards
+        //Main class to call Poker hands Matcher and compare ranking
         Player[] players = new Player[2];
-//        char[] suitList = new char[5];
-//        String[] valueList = new String[5];
-//        int strLen = 0;
 
         //list of matchers for ranking categories
         List<ICategory> matchList = new ArrayList<ICategory>();
@@ -42,25 +39,10 @@ public class PokerHands {
         matchList.add(fourOfAKind);
         matchList.add(straightFlush);
 
+        //Setup players poker hands for comparison
+
         players[0] = setUp(first);
         players[1] = setUp(second);
-
-        //Setup players poker hands for comparison
-        /*
-        String tempInfo[] = new String[6]; //store name and 5 pokers on hand
-        //convert each input string to name and the suit and the number
-        for (int i = 0; i < NumOfPersons; i++) {
-            tempInfo = cardsInput[i].split(" ");
-            //extract all suits into suitList
-            //extract all values into valueList
-            for (int j = 0; j < 5; j++) {
-                strLen = tempInfo[j + 1].length();
-                suitList[j] = tempInfo[j + 1].charAt(strLen - 1);
-                valueList[j] = tempInfo[j + 1].substring(0, strLen - 1);
-            }
-            tempInfo[0] = tempInfo[0].substring(0, tempInfo[0].length() - 1);
-            players[i] = new Player(tempInfo[0], suitList, valueList);
-        }*/
 
         //call an interface to categoty matcher for each player
         // then compare based on different categories or same categories
@@ -97,37 +79,21 @@ public class PokerHands {
     }
 
     Player setUp(String cardsInput){
-        //String cardsInput[] = {first, second};    //keep each player's input cards
-        //Player player = new Player[2];
-        char[] suitList = new char[5];
-        String[] valueList = new String[5];
+        //setup the cards of a player and validate the input cards value
+        char[] suitList = new char[NumOfCards];
+        String[] valueList = new String[NumOfCards];
         int strLen = 0;
 
         String[] tempInfo = cardsInput.split(" ");
         //extract all suits into suitList
         //extract all values into valueList
-        for (int j = 0; j < 5; j++) {
+        for (int j = 0; j < NumOfCards; j++) {
             strLen = tempInfo[j + 1].length();
             suitList[j] = tempInfo[j + 1].charAt(strLen - 1);
             valueList[j] = tempInfo[j + 1].substring(0, strLen - 1);
         }
         tempInfo[0] = tempInfo[0].substring(0, tempInfo[0].length() - 1);
         Player player = new Player(tempInfo[0], suitList, valueList);
-
-/*        String tempInfo[] = new String[6]; //store name and 5 pokers on hand
-        //convert each input string to name and the suit and the number
-        for (int i = 0; i < NumOfPersons; i++) {
-            tempInfo = cardsInput[i].split(" ");
-            //extract all suits into suitList
-            //extract all values into valueList
-            for (int j = 0; j < 5; j++) {
-                strLen = tempInfo[j + 1].length();
-                suitList[j] = tempInfo[j + 1].charAt(strLen - 1);
-                valueList[j] = tempInfo[j + 1].substring(0, strLen - 1);
-            }
-            tempInfo[0] = tempInfo[0].substring(0, tempInfo[0].length() - 1);
-            playerlist[i] = new Player(tempInfo[0], suitList, valueList);
-        }*/
 
         return player;
     }

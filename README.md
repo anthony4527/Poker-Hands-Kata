@@ -6,7 +6,7 @@ The Program for accomplishing the Kata is developed with a number of classes org
 
 2) A **Player class and Winner class** are created and grouped into the **Players folder**. The Player class will instantiate each player object,and provide the key information about the cards on hand of each player. One of the player will become the winner. A Winnder extends from the Player class,and it has additional information of the category identifed and the winning card and suit (hence the trump card)
 
-3)  Enum have been created for the **Card values, Card suit and Categories**. These provide immediate codes to setup a scre of each card, and each category (ranking from High Card as lowest, to Straight Flush highest).
+3)  Enum have been created for the **Card values, Card suit and Categories**. These provide immediate codes to setup a score of each card, and each category (ranking from High Card as lowest, to Straight Flush highest).
 
 4) **A Matcher class for each category** is created e.g. StraightFlishCategory, FullHouseCategory, etc., all these classes are grouped into the **Category package/folder**. An **ICategory** interface is developed to define method signature for matching and ranking (two methods) of each player's Poker hand. All the matcher classes implement the ICategory interface.
 
@@ -22,4 +22,4 @@ Throghout the TDD process, codes are continuingly enhanced and refactored, to ad
 
 Testing of the Program
 ======================
-The comparePokerHandTest class include simple test and parameterized test cases, using csv file in resources folder, for testing the program. The test class can be run to verify program passes all test cases. The test cases for invalid input of poker hands are also included, in the InvalidCard csv file. The Poker Hand program will throw exceptions if any invalid card value, suit or number of cards are input.
+The **PokerHandCompareTest class in Test folder** includes simple test and parameterized test cases, using csv files in resources folder, for testing the program. The test class can be run to verify program passes all 50+ test cases. The test cases for invalid input of poker hands are also included, in the InvalidCard csv file. The Poker Hand program will throw exceptions if any invalid card value, suit or number of cards are input.

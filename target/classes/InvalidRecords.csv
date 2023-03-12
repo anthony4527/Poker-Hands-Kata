@@ -1,2 +1,11 @@
 expected,black,white
 ??Incorrect number of cards - Black: 2H 3D 5S 9C 9D 2C,Black: 2H 3D 5S 9C 9D 2C,White: 2C 3H 4S 8C AH
+??Incorrect number of cards - White: 2C 3H 4S 8C AH 4S,Black: 2H 3D 5S 9C 9D,White: 2C 3H 4S 8C AH 4S
+??Invalid suit - R,Black: 2H 3D 5R 9C 9D,White: 2C 3H 4S 8C AH
+??Invalid card value - Z,Black: 2H 3D 5S KC ZD,White: 2C 3H 4S 8C AH
+??Invalid card value - @,Black: 2H @D 5S KC ZD,White: 2C #H 4S 8C AH
+??Invalid card value - 3D,Black: 2H 3DD 5S KC ZD,White: 2C TH 4S 8C AH
+??Invalid suit - X,Black: 2H 3DDX 5S KC ZD,White: 2C TH 4S 8C AH
+??Invalid card value - 3DD,Black: 2H 3DDD 5S KC ZD,White: 2C TH 4S 8C AH
+??Incorrect number of cards - Black: 2H 3DDX 5S K C ZD,Black: 2H 3DDX 5S K C ZD,White: 2C TH 4S T 8C AH
+??Invalid card value - +,Black: 2H +D 5S -C ZD,White: 2C #H 4S 8C AH

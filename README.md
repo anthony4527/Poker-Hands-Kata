@@ -2,7 +2,7 @@
 
 The Program for accomplishing the Kata is developed with a number of classes organized by the following structure:
 
-1) ***PokerHands.java** is the main class which provides the compare() method for ranking the Poker hands of two players. It calls a listof pattern matchers for the different categories of poker hands. It then identify if there is any one player is of a higher category and becomes winner. If both players are of same category, it calls the ranking method of that respective category to compare and identify the winner.
+1) ***PokerHands.java*** is the main class which provides the compare() method for ranking the Poker hands of two players. It calls a listof pattern matchers for the different categories of poker hands. It then identify if there is any one player is of a higher category and becomes winner. If both players are of same category, it calls the ranking method of that respective category to compare and identify the winner.
 
 2) A **Player class and Winner class** are created and grouped into the **Players folder**. The Player class will instantiate each player object,and provide the key information about the cards on hand of each player. One of the player will become the winner. A Winnder extends from the Player class,and it has additional information of the category identifed and the winning card and suit (hence the trump card)
 
